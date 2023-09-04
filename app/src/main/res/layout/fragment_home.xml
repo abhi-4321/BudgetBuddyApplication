@@ -37,10 +37,11 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:fillViewport="true"
         >
 
@@ -49,7 +50,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_35sdp"
         android:orientation="vertical"
-
         android:background="#FFF"
         android:layout_marginHorizontal="@dimen/_15sdp">
 
@@ -85,43 +85,57 @@
                 android:text="Why to budget"/>
 
         </LinearLayout>
-        <LinearLayout
+
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            >
+
             <LinearLayout
-                android:layout_width="290dp"
-                android:layout_height="170dp"
-
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#ADD8E6"
-                android:background="@drawable/bg">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="170dp"
+
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#ADD8E6"
+                    android:background="@drawable/bg">
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="170dp"
+                    android:layout_marginLeft="@dimen/_13sdp"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#DDC3A5"
+                    android:background="@drawable/bg">
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="170dp"
+                    android:layout_marginLeft="@dimen/_13sdp"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#A7BEAE"
+                    android:background="@drawable/bg">
+
+
+                </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="290dp"
-                android:layout_height="170dp"
-               android:layout_marginLeft="@dimen/_13sdp"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#DDC3A5"
-                android:background="@drawable/bg">
+
+        </HorizontalScrollView>
 
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="290dp"
-                android:layout_height="170dp"
-                android:layout_marginLeft="@dimen/_13sdp"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#A7BEAE"
-                android:background="@drawable/bg">
-
-
-            </LinearLayout>
-        </LinearLayout>
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -178,4 +192,5 @@
     </LinearLayout>
 
     </ScrollView>
+
 </LinearLayout>
