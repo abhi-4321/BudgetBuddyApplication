@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentBudgetBinding
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
@@ -32,7 +33,7 @@ class BudgetFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentBudgetBinding.inflate(inflater, container, false)
+        _binding = FragmentBudgetBinding.inflate(inflater,container, false)
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root    }

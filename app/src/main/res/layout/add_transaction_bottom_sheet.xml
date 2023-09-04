@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#f4f4f4"
+        >
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="@dimen/_23sdp"
+            android:layout_height="@dimen/_23sdp"
+            android:src="@drawable/baseline_close_24"
+            android:layout_marginStart="@dimen/_5sdp"/>
+
+        <TextView
+            android:text="Add Transaction"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_width="match_parent"
+            android:background="@android:color/transparent"
+            android:textAlignment="viewStart"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#f4f4f4"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_46sdp"
+                android:id="@+id/amount"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/baseline_currency_rupee_24"
+                android:hint="0"
+                android:paddingHorizontal="@dimen/_40sdp"
+                android:textColor="#2C9606"
+                android:textColorHint="#2C9606"
+                android:textSize="@dimen/_20ssp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:background="@drawable/custom_edittext"
+                android:layout_height="@dimen/_46sdp"
+                android:drawableLeft="@drawable/sharp_question_mark_24"
+                android:hint="Select Category"
+                android:drawablePadding="@dimen/_20sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:id="@+id/category"
+                android:textSize="@dimen/textSize"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_46sdp"
+                android:drawableLeft="@drawable/baseline_notes_24"
+                android:id="@+id/note"
+                android:hint="Write Note"
+                android:drawablePadding="@dimen/_20sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:background="@drawable/custom_edittext"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_46sdp"
+                android:drawableLeft="@drawable/baseline_calendar_month_24"
+                android:id="@+id/date"
+                android:hint="Today"
+                android:drawablePadding="@dimen/_20sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:background="@drawable/custom_edittext"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_46sdp"
+                android:drawableLeft="@drawable/baseline_account_balance_wallet_24"
+                android:id="@+id/mode"
+                android:hint="Cash"
+                android:drawablePadding="@dimen/_20sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:background="@drawable/custom_edittext"
+                />
+
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
