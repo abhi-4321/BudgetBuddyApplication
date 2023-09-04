@@ -24,27 +24,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn"
-            style="@style/Widget.Design.FloatingActionButton"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:text="+"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginBottom="@dimen/_1sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn"
+                    style="@style/Widget.Design.FloatingActionButton"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:text="+"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frame"
+                    app:layout_goneMarginBottom="@dimen/_2sdp" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bot_nav_view"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
             app:elevation="2dp"
-            app:itemIconSize="20dp"
+            app:itemIconSize="@dimen/_18sdp"
             android:theme="@style/bottomNav"
             app:labelVisibilityMode="auto"
             app:layout_constraintBottom_toBottomOf="parent"

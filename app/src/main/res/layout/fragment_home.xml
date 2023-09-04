@@ -6,7 +6,7 @@
     android:id="@+id/home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7f7f7"
+    android:background="#FFFF"
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
@@ -14,7 +14,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F7f7f7"
+        android:background="#FFF"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -39,18 +39,19 @@
     </com.google.android.material.appbar.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+
         android:fillViewport="true"
         >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_35sdp"
         android:orientation="vertical"
 
-        android:background="#F7f7f7"
-        android:layout_marginHorizontal="20dp">
+        android:background="#FFF"
+        android:layout_marginHorizontal="@dimen/_15sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="₹2,000"
-            android:textSize="38dp"
+            android:textSize="@dimen/_28ssp"
             android:textStyle="bold"
             android:textColor="@color/black"
             />
@@ -68,13 +69,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Current balance"
-            android:textSize="16dp"/>
+            android:textSize="@dimen/_12ssp"/>
     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_18sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Why to budget"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="290dp"
+                android:layout_height="170dp"
+
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#ADD8E6"
+                android:background="@drawable/bg">
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="290dp"
+                android:layout_height="170dp"
+               android:layout_marginLeft="@dimen/_13sdp"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#DDC3A5"
+                android:background="@drawable/bg">
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="290dp"
+                android:layout_height="170dp"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#A7BEAE"
+                android:background="@drawable/bg">
+
+
+            </LinearLayout>
+        </LinearLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginTop="25dp">
+    android:layout_marginTop="@dimen/_18sdp">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,6 +136,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="Spending report"/>
+
 </LinearLayout>
 <LinearLayout
     android:layout_width="match_parent"
@@ -91,22 +146,34 @@
     android:padding="10dp"
     android:background="@drawable/bg"
     >
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        android:background="#F7F7F7"
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabTextColor="@color/tab_unselected_color"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_18sdp"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="₹1,000"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/_8sdp"
         android:text="Total spend this month"/>
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"
         android:layout_width="match_parent"
-        android:layout_height="350dp"/>
+        android:layout_height="300dp"/>
 </LinearLayout>
+
+
 
     </LinearLayout>
 

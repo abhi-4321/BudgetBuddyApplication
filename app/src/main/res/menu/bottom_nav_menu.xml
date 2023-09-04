@@ -11,7 +11,7 @@
 
     <item
         android:title="Transactions"
-        android:icon="@drawable/transaction"
+        android:icon="@drawable/transcation"
         android:id="@+id/transactions"
         app:showAsAction="withText"
         />

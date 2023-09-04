@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.android.material.tabs.TabLayout
 
 class HomeFragment : Fragment() {
 
@@ -49,7 +50,7 @@ class HomeFragment : Fragment() {
 
         val dataSet = BarDataSet(information, "Report")
 //        dataSet.colors = ColorTemplate.MATERIAL_COLORS.asList()
-        dataSet.setColors(ColorTemplate.rgb("#FF5733"))
+        dataSet.setColors(ColorTemplate.rgb("#317773"))
         dataSet.valueTextColor = Color.BLACK
         dataSet.valueTextSize = 10f
 
@@ -88,6 +89,12 @@ class HomeFragment : Fragment() {
             setDrawLabels(false)
             setDrawAxisLine(false)
         }
+        binding.barChart.setTouchEnabled(false)
+
+// Disable zooming on both the X and Y axes
+        binding.barChart.setScaleEnabled(false)
+        binding.barChart.setScaleXEnabled(false)
+        binding.barChart.setScaleYEnabled(false)
         binding.barChart.setDrawGridBackground(false)
         binding.barChart.setDrawBorders(false)
         binding.barChart.legend.isEnabled = false
@@ -103,6 +110,28 @@ class HomeFragment : Fragment() {
       // Set X-axis label text color
         xAxis.textSize = 10f
 
+
+        //implementing tab layout
+        val monthsTab = binding.tabLayout.newTab()
+        val weeksTab = binding.tabLayout.newTab()
+        monthsTab.text = "Months"
+        weeksTab.text = "Weeks"
+        binding.tabLayout.addTab(monthsTab)
+        binding.tabLayout.addTab(weeksTab)
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                // Handle tab selection
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                // Handle tab unselection
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                // Handle tab reselection
+            }
+        })
 
         return binding.root
     }
