@@ -6,7 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.budgetbuddy.R
+import com.example.budgetbuddy.databinding.FragmentBudgetBinding
+import com.example.budgetbuddy.databinding.FragmentHomeBinding
+import com.example.budgetbuddy.databinding.FragmentProfileBinding
+import com.example.budgetbuddy.ui.home.HomeViewModel
 
 class BudgetFragment : Fragment() {
 
@@ -15,18 +20,26 @@ class BudgetFragment : Fragment() {
     }
 
     private lateinit var viewModel: BudgetViewModel
+    private var _binding : FragmentBudgetBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(requireActivity())[BudgetViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_budget, container, false)
-    }
+    ): View {
+        _binding = FragmentBudgetBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BudgetViewModel::class.java)
-        // TODO: Use the ViewModel
+        return binding.root    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }
