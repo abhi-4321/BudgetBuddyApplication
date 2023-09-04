@@ -2,8 +2,6 @@ package com.example.budgetbuddy.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.SurfaceControl.Transaction
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.ActivityMainBinding
@@ -11,6 +9,7 @@ import com.example.budgetbuddy.ui.budget.BudgetFragment
 import com.example.budgetbuddy.ui.home.HomeFragment
 import com.example.budgetbuddy.ui.profile.ProfileFragment
 import com.example.budgetbuddy.ui.transactions.TransactionsFragment
+import com.example.budgetbuddy.util.BottomSheetAddTransaction
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +23,9 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment.newInstance())
 
         binding.btn.setOnClickListener{
-            Toast.makeText(this,"Add",Toast.LENGTH_SHORT).show()
+            val bottomSheetDialog = BottomSheetAddTransaction()
+            bottomSheetDialog.isCancelable = false
+            bottomSheetDialog.show(supportFragmentManager,"Bottom Sheet")
         }
 
         binding.botNavView.setOnItemSelectedListener {
