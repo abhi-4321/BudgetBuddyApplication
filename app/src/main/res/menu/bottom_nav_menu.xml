@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Home"
+        android:icon="@drawable/home"
+        android:id="@+id/home"
+        app:showAsAction="withText"
+        />
+
+    <item
+        android:title="Transactions"
+        android:icon="@drawable/transaction"
+        android:id="@+id/transactions"
+        app:showAsAction="withText"
+        />
+
+    <item
+        android:title=""
+        app:showAsAction="withText"
+        />
+
+    <item
+        android:title="Budget"
+        android:icon="@drawable/budget"
+        android:id="@+id/budget"
+        app:showAsAction="withText"
+        />
+
+    <item
+        android:title="Profile"
+        android:icon="@drawable/user"
+        android:id="@+id/profile"
+        app:showAsAction="withText"
+        />
+
+</menu>
