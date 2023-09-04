@@ -40,7 +40,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:fillViewport="true"
         >
 
@@ -85,18 +84,59 @@
                 android:text="Why to budget"/>
 
         </LinearLayout>
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="290dp"
-                android:layout_height="170dp"
 
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+                 android:padding="10sp"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#ADD8E6"
                 android:background="@drawable/bg">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Financial Discipline"/>
+        <View
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:text="Budgeting builds financial discipline for money management"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/savemoney"/>
+          </LinearLayout>
 
             </LinearLayout>
             <LinearLayout
@@ -121,7 +161,9 @@
 
 
             </LinearLayout>
+
         </LinearLayout>
+        </HorizontalScrollView>
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -144,6 +186,7 @@
     android:layout_marginTop="10dp"
     android:orientation="vertical"
     android:padding="10dp"
+    android:layout_marginBottom="200dp"
     android:background="@drawable/bg"
     >
     <com.google.android.material.tabs.TabLayout
