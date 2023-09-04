@@ -12,9 +12,7 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.tabs.TabLayout
 
@@ -132,7 +130,31 @@ class HomeFragment : Fragment() {
                 // Handle tab reselection
             }
         })
+//implementing pichart which shows data related to category
 
+        val records = ArrayList<PieEntry>()
+        records.add(PieEntry(32f, "food & beverages"))
+        records.add(PieEntry(62f, "petrol"))
+        records.add(PieEntry(20f, "rent"))
+        records.add(PieEntry(72f, "bills"))
+        records.add(PieEntry(82f, "other expenses"))
+        records.add(PieEntry(22f, "vehicle Maintenance"))
+        records.add(PieEntry(34f, "medical check up"))
+        records.add(PieEntry(12f, "pets"))
+
+        val piedataset = PieDataSet(records, "Report")
+
+        val colors = ColorTemplate.COLORFUL_COLORS.toList()
+        piedataset.setColors(colors)
+        piedataset.setValueTextColor(Color.BLACK)
+        piedataset.setValueTextSize(10f)
+        binding.piChart.description.isEnabled = false
+        val piedata = PieData(piedataset)
+        binding.piChart.data = piedata
+
+       binding.piChart.invalidate()
+        binding.piChart.centerText = "Spending based on category"
+        binding.piChart.setDrawSliceText(false)
         return binding.root
     }
 

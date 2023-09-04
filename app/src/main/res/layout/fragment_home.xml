@@ -96,7 +96,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="170dp"
-                 android:padding="10sp"
+                 android:padding="@dimen/_8sdp"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#ADD8E6"
@@ -140,25 +140,97 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="290dp"
+                android:layout_width="wrap_content"
                 android:layout_height="170dp"
                android:layout_marginLeft="@dimen/_13sdp"
+                android:padding="@dimen/_8sdp"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#DDC3A5"
                 android:background="@drawable/bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14ssp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:text="Financial Empowerment"/>
+                        <View
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:background="@color/black"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10ssp"
+                            android:text="Budgeting for Responsible Money Management and Goal Achievement."/>
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:src="@drawable/target"/>
+                </LinearLayout>
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="290dp"
+                android:layout_width="wrap_content"
                 android:layout_height="170dp"
                 android:layout_marginLeft="@dimen/_13sdp"
                 android:orientation="vertical"
+                android:padding="@dimen/_8sdp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#A7BEAE"
                 android:background="@drawable/bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14ssp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:text="Financial Success     "/>
+                        <View
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:background="@color/black"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10ssp"
+                            android:text="Budgeting ensures lifelong financial success."/>
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:src="@drawable/done"/>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -186,7 +258,6 @@
     android:layout_marginTop="10dp"
     android:orientation="vertical"
     android:padding="10dp"
-    android:layout_marginBottom="200dp"
     android:background="@drawable/bg"
     >
     <com.google.android.material.tabs.TabLayout
@@ -215,6 +286,36 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"/>
 </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_18sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Spending by categories"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginBottom="@dimen/_100sdp"
+            >
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/piChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_300sdp"/>
+        </LinearLayout>
+
 
 
 
