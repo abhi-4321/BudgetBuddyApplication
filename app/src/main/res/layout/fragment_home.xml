@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFF"
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
@@ -14,7 +12,6 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFF"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -25,301 +22,319 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Budget buddy"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    />
+                    android:text="@string/app_name"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        >
+        android:scrollbars="none">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_35sdp"
-        android:orientation="vertical"
-
-        android:background="#FFF"
-        android:layout_marginHorizontal="@dimen/_15sdp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="₹2,000"
-            android:textSize="@dimen/_28ssp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current balance"
-            android:textSize="@dimen/_12ssp"/>
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/_18sdp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="19dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="Why to budget"/>
-
-        </LinearLayout>
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="170dp"
-                 android:padding="@dimen/_8sdp"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#ADD8E6"
-                android:background="@drawable/bg">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="horizontal">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_14ssp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:text="Financial Discipline"/>
-        <View
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:background="@color/black"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp"
-            android:text="Budgeting builds financial discipline for money management"/>
-    </LinearLayout>
-    <ImageView
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
-        android:src="@drawable/savemoney"/>
-          </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="170dp"
-               android:layout_marginLeft="@dimen/_13sdp"
-                android:padding="@dimen/_8sdp"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#DDC3A5"
-                android:background="@drawable/bg">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/_14ssp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:text="Financial Empowerment"/>
-                        <View
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:layout_marginBottom="@dimen/_5sdp"
-                            android:background="@color/black"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp"
-                            android:text="Budgeting for Responsible Money Management and Goal Achievement."/>
-                    </LinearLayout>
-                    <ImageView
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:src="@drawable/target"/>
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="170dp"
-                android:layout_marginLeft="@dimen/_13sdp"
-                android:orientation="vertical"
-                android:padding="@dimen/_8sdp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#A7BEAE"
-                android:background="@drawable/bg">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/_14ssp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:text="Financial Success     "/>
-                        <View
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:layout_marginBottom="@dimen/_5sdp"
-                            android:background="@color/black"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp"
-                            android:text="Budgeting ensures lifelong financial success."/>
-                    </LinearLayout>
-                    <ImageView
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:src="@drawable/done"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        </HorizontalScrollView>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="@dimen/_18sdp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="19dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="Spending report"/>
-
-</LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:background="@drawable/bg"
-    >
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        android:background="#F7F7F7"
-        app:tabIndicatorColor="@color/colorAccent"
-        app:tabTextColor="@color/tab_unselected_color"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_18sdp"
-        android:textColor="@color/black"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:text="₹1,000"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_8sdp"
-        android:text="Total spend this month"/>
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barChart"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
-</LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/_18sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="19dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="Spending by categories"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginBottom="@dimen/_100sdp"
-            >
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/piChart"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_300sdp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹2,000"
+                    android:textSize="@dimen/_28ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current balance"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Why to budget"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="170dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg"
+                        android:backgroundTint="#ADD8E6"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_8sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Financial Discipline"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:textStyle="bold" />
+
+                                <View
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/black" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Budgeting builds financial discipline for money management"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_10ssp" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_70sdp"
+                                android:src="@drawable/savemoney" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="170dp"
+                        android:layout_marginLeft="@dimen/_13sdp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg"
+                        android:backgroundTint="#DDC3A5"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_8sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Financial Empowerment"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:textStyle="bold" />
+
+                                <View
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/black" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Budgeting for Responsible Money Management and Goal Achievement."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_10ssp" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_70sdp"
+                                android:src="@drawable/target" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="170dp"
+                        android:layout_marginLeft="@dimen/_13sdp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg"
+                        android:backgroundTint="#A7BEAE"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_8sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Financial Success     "
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:textStyle="bold" />
+
+                                <View
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/black" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Budgeting ensures lifelong financial success."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_10ssp" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_70sdp"
+                                android:src="@drawable/done" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spending report"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg"
+                android:backgroundTint="@android:color/transparent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabMode="fixed"
+                    app:tabTextColor="@color/tab_unselected_color" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="₹1,000"
+                    android:textSize="@dimen/_18sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total spend this month"
+                    android:textSize="@dimen/_8sdp" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spending by categories"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/_100sdp"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/piChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_300sdp" />
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
-
-
-    </LinearLayout>
 
     </ScrollView>
 </LinearLayout>

@@ -32,7 +32,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
     }
