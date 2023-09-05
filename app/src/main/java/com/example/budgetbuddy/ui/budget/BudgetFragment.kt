@@ -34,7 +34,7 @@ class BudgetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBudgetBinding.inflate(inflater,container, false)
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
 
         return binding.root    }
 

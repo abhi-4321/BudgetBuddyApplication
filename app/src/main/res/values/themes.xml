@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.BudgetBuddy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FFFFFF</item>
-        <item name="colorPrimaryVariant">#000000</item>
+        <item name="colorPrimary">#0000</item>
+        <item name="colorPrimaryVariant">#317773</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -20,5 +20,15 @@
     <style name="bottomNav" parent="@style/Theme.BudgetBuddy">
         <item name="colorPrimary">#000</item>
     </style>
+    <style name="MyTextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <!-- Default border color -->
+        <item name="boxStrokeColor">@color/default_border_color</item>
+
+
+
+        <!-- Border color for the focused state -->
+
+    </style>
+
 
 </resources>

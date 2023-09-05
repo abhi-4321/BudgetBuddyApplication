@@ -1,116 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
+
+
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:src="@drawable/baseline_close_24"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:text="Add Transaction"
+        android:textStyle="bold"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        app:layout_constraintStart_toEndOf="@id/close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/done"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:src="@drawable/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="@dimen/_10sdp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#f4f4f4"
-        >
-
-        <ImageView
-            android:id="@+id/close"
-            android:layout_width="@dimen/_23sdp"
-            android:layout_height="@dimen/_23sdp"
-            android:src="@drawable/baseline_close_24"
-            android:layout_marginStart="@dimen/_5sdp"/>
-
-        <TextView
-            android:text="Add Transaction"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp"
-            android:textColor="@color/black"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            android:layout_width="match_parent"
-            android:background="@android:color/transparent"
-            android:textAlignment="viewStart"
-            android:layout_height="wrap_content"
-            />
-
-    </LinearLayout>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_10sdp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#f4f4f4"
-        >
+        android:layout_marginTop="@dimen/_16sdp"
 
+        android:orientation="vertical">
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:endIconMode="clear_text"
+
+        app:boxStrokeColor="@color/boxStrokeColorFocused"
+        app:hintTextColor="@color/boxStrokeColorFocused"
+        android:layout_height="wrap_content"
+        android:hint="Amount">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="11"
+           />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:endIconMode="clear_text"
+        app:boxStrokeColor="@color/boxStrokeColorFocused"
+        app:hintTextColor="@color/boxStrokeColorFocused"
+        android:layout_height="wrap_content"
+        android:hint="Remark">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextbg"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:gravity="center|left"
+            android:orientation="horizontal">
+        <ImageView
+            android:layout_width="@dimen/_23sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:src="@drawable/paperclip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/boxStrokeColorFocused"
+            android:layout_marginHorizontal="@dimen/_7sdp"
+            android:text="Attach image and PDF"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_46sdp"
-                android:id="@+id/amount"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_currency_rupee_24"
-                android:hint="0"
-                android:paddingHorizontal="@dimen/_40sdp"
-                android:textColor="#2C9606"
-                android:textColorHint="#2C9606"
-                android:textSize="@dimen/_20ssp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:background="@drawable/custom_edittext"
-                android:layout_height="@dimen/_46sdp"
-                android:drawableLeft="@drawable/sharp_question_mark_24"
-                android:hint="Select Category"
-                android:drawablePadding="@dimen/_20sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
-                android:id="@+id/category"
-                android:textSize="@dimen/textSize"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_46sdp"
-                android:drawableLeft="@drawable/baseline_notes_24"
-                android:id="@+id/note"
-                android:hint="Write Note"
-                android:drawablePadding="@dimen/_20sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
-                android:background="@drawable/custom_edittext"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_46sdp"
-                android:drawableLeft="@drawable/baseline_calendar_month_24"
-                android:id="@+id/date"
-                android:hint="Today"
-                android:drawablePadding="@dimen/_20sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
-                android:background="@drawable/custom_edittext"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_46sdp"
-                android:drawableLeft="@drawable/baseline_account_balance_wallet_24"
-                android:id="@+id/mode"
-                android:hint="Cash"
-                android:drawablePadding="@dimen/_20sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
-                android:background="@drawable/custom_edittext"
-                />
-
-
-
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15ssp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Mode"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textSize="@dimen/_10sdp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg"
+                android:backgroundTint="#E4E3E3"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:paddingVertical="@dimen/_6sdp"
+                    android:paddingHorizontal="@dimen/_13sdp"
+                    android:textSize="@dimen/_9sdp"
+                    android:text="Cash"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg"
+                android:backgroundTint="#E4E3E3"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:paddingHorizontal="@dimen/_13sdp"
+                    android:textSize="@dimen/_9sdp"
+                    android:text="Online"/>
+            </LinearLayout>
+        </LinearLayout>
         </LinearLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_15ssp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:endIconMode="clear_text"
+            app:boxStrokeColor="@color/boxStrokeColorFocused"
+            app:hintTextColor="@color/boxStrokeColorFocused"
+            android:layout_height="wrap_content"
+            android:hint="Category">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15ssp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount In or Out"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textSize="@dimen/_10sdp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7ssp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg"
+                    android:backgroundTint="#E4E3E3"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/_6sdp"
+                        android:paddingHorizontal="@dimen/_13sdp"
+                        android:textSize="@dimen/_9sdp"
+                        android:text="Debit"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg"
+                    android:backgroundTint="#E4E3E3"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/_6sdp"
+                        android:paddingHorizontal="@dimen/_13sdp"
+                        android:textSize="@dimen/_9sdp"
+                        android:text="Credit"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:orientation="vertical">
 
-    </com.google.android.material.card.MaterialCardView>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Date"
+           android:layout_marginLeft="@dimen/_10sdp"
+           android:textSize="@dimen/_10sdp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:orientation="horizontal">
+           <ImageView
+               android:layout_width="@dimen/_20sdp"
+               android:layout_height="@dimen/_20sdp"
+               android:src="@drawable/calendar"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:text="07/08/2001"/>
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textSize="@dimen/_10sdp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/clock"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="7:30 pm"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+    </LinearLayout>

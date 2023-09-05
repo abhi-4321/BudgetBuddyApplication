@@ -9,36 +9,31 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentBudgetBinding
+import com.example.budgetbuddy.databinding.FragmentHomeBinding
 import com.example.budgetbuddy.databinding.FragmentProfileBinding
 import com.example.budgetbuddy.ui.home.HomeViewModel
 
 class ProfileFragment : Fragment() {
-
+    private lateinit var binding: FragmentProfileBinding
     companion object {
         fun newInstance() = ProfileFragment()
     }
-
-    private lateinit var viewModel: ProfileViewModel
-    private var _binding : FragmentProfileBinding? = null
-    private val binding get() = _binding!!
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentProfileBinding.inflate(layoutInflater)
+
 
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding=null
-    }
+
 
 }
