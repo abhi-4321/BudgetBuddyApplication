@@ -33,7 +33,6 @@ class TransactionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTransactionsBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
     }

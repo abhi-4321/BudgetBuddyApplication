@@ -12,6 +12,7 @@
 
         <item name="android:textColor">@color/black</item>
 
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -23,11 +24,7 @@
     <style name="MyTextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <!-- Default border color -->
         <item name="boxStrokeColor">@color/default_border_color</item>
-
-
-
         <!-- Border color for the focused state -->
-
     </style>
 
 

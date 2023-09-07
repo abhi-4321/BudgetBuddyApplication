@@ -1,5 +1,6 @@
 package com.example.budgetbuddy.util
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,9 +22,23 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val sharedPreferences = context?.getSharedPreferences("Category",MODE_PRIVATE)
+
         binding=AddTransactionBottomSheetBinding.inflate(layoutInflater)
         binding.close.setOnClickListener {
             dialog?.cancel()
+        }
+
+        if (!sharedPreferences?.getString("category","").isNullOrEmpty())
+        {
+            binding.category.setText(sharedPreferences?.getString("category",""))
+        }
+
+        binding.category.isFocusable = false
+        binding.category.setOnClickListener {
+            val bottomSheetDialog = BottomSheetCategory()
+            bottomSheetDialog.isCancelable = false
+            bottomSheetDialog.show(requireFragmentManager(),"Bottom Sheet Category")
         }
 
         return binding.root

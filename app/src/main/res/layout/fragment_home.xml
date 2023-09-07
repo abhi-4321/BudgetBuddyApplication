@@ -255,9 +255,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabGravity="fill"
-                    app:tabIndicatorColor="@color/colorAccent"
-                    app:tabMode="fixed"
-                    app:tabTextColor="@color/tab_unselected_color" />
+                    style="@style/Widget.Design.TabLayout"
+                    app:tabIndicatorColor="?attr/colorPrimaryVariant"
+                    app:tabMode="fixed" />
 
                 <TextView
                     android:layout_width="wrap_content"

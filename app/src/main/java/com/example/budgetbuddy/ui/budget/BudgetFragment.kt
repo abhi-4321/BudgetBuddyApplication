@@ -36,7 +36,8 @@ class BudgetFragment : Fragment() {
         _binding = FragmentBudgetBinding.inflate(inflater,container, false)
 
 
-        return binding.root    }
+        return binding.root
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
