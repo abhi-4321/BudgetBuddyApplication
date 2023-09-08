@@ -1,22 +1,31 @@
-package com.example.budgetbuddy.util
+package com.example.budgetbuddy.util.category
 
+import android.content.ContentValues.TAG
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.R
+import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.CategoryBottomSheetBinding
+import com.example.budgetbuddy.repository.CategoryRepository
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener{
+class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener,CategoryAdapter.ClickListener{
+
     lateinit var behavior: BottomSheetBehavior<FrameLayout>
     lateinit var binding:CategoryBottomSheetBinding
-    private val arrayList = ArrayList<CategoryItem>()
+    private var arrayList = ArrayList<Category>()
+    private lateinit var viewModel : CategoryViewModel
 
     private fun getWindowHeight() =resources.displayMetrics.heightPixels
 
@@ -24,7 +33,13 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener{
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ) : View? {
+
+        val categoryDao = Database.getInstance(requireContext()).categoryDao()
+        val categoryRepository = CategoryRepository(categoryDao)
+        viewModel = ViewModelProvider(this,
+            CategoryViewModelFactory(categoryRepository)
+        )[CategoryViewModel::class.java]
 
         binding= CategoryBottomSheetBinding.inflate(layoutInflater)
         binding.close.setOnClickListener {
@@ -69,17 +84,21 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener{
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.isVerticalScrollBarEnabled = false
 
-        arrayList.add(CategoryItem(R.drawable.transferout,"Outgoing Transfer"))
-        arrayList.add(CategoryItem(R.drawable.transferin,"Incoming Transfer"))
-        arrayList.add(CategoryItem(R.drawable.profile,"NEW CATEGORY"))
+        var myAdapter : CategoryAdapter? = null
 
-        val myAdapter = CategoryAdapter(arrayList)
-        binding.recycler.adapter = myAdapter
-        myAdapter.notifyDataSetChanged()
+        viewModel.getCategories().observe(this, Observer {
+            arrayList = it as ArrayList<Category>
+            arrayList.add(
+                Category(R.drawable.profile,"NEW CATEGORY")
+            )
+            myAdapter = CategoryAdapter(arrayList,requireContext(),this)
+            binding.recycler.adapter = myAdapter
+        })
+
+        myAdapter?.notifyDataSetChanged()
 
         return binding.root
     }
-
     override fun onStart() {
         super.onStart()
 
@@ -247,6 +266,7 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener{
             }
         }
 
+
         val sharedPreferences = requireContext().getSharedPreferences("Category",MODE_PRIVATE)
         sharedPreferences.getString("category","")
 
@@ -254,5 +274,12 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener{
         editor.putString("category",category)
         editor.apply()
 
+        dismiss()
     }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(context,position.toString(),Toast.LENGTH_SHORT).show()
+        dismiss()
+    }
+
 }

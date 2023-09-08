@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.BudgetBuddy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#0000</item>
+        <item name="colorPrimary">#009688</item>
         <item name="colorPrimaryVariant">#317773</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

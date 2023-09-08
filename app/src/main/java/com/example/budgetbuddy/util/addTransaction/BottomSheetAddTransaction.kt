@@ -1,20 +1,32 @@
-package com.example.budgetbuddy.util
+package com.example.budgetbuddy.util.addTransaction
 
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.budgetbuddy.databinding.AddTransactionBottomSheetBinding
+import com.example.budgetbuddy.util.category.BottomSheetCategory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetAddTransaction : BottomSheetDialogFragment() {
     lateinit var behavior: BottomSheetBehavior<FrameLayout>
     lateinit var binding: AddTransactionBottomSheetBinding
+    lateinit var viewModel: AddTransactionViewModel
 
     private fun getWindowHeight() =resources.displayMetrics.heightPixels
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this,
+            AddTransactionViewModelFactory(requireContext())
+        )[AddTransactionViewModel::class.java]
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,23 +34,18 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val sharedPreferences = context?.getSharedPreferences("Category",MODE_PRIVATE)
-
         binding=AddTransactionBottomSheetBinding.inflate(layoutInflater)
         binding.close.setOnClickListener {
             dialog?.cancel()
         }
-
-        if (!sharedPreferences?.getString("category","").isNullOrEmpty())
-        {
-            binding.category.setText(sharedPreferences?.getString("category",""))
-        }
-
+        viewModel._category.observe(this, Observer {
+                binding.category.setText(it)
+        })
         binding.category.isFocusable = false
         binding.category.setOnClickListener {
             val bottomSheetDialog = BottomSheetCategory()
             bottomSheetDialog.isCancelable = false
-            bottomSheetDialog.show(requireFragmentManager(),"Bottom Sheet Category")
+            bottomSheetDialog.show(requireActivity().supportFragmentManager,"Bottom Sheet Category")
         }
 
         return binding.root
@@ -68,4 +75,5 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment() {
 
         })
     }
+
 }
