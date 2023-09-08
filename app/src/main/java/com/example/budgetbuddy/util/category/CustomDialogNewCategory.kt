@@ -3,12 +3,17 @@ package com.example.budgetbuddy.util.category
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.repository.CategoryRepository
+import com.example.budgetbuddy.util.addTransaction.BottomSheetAddTransaction
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -31,6 +36,8 @@ class CustomDialogNewCategory(val contexte: Context) : Dialog(contexte), View.On
         cancel = findViewById<View>(R.id.cancel) as MaterialButton
         add!!.setOnClickListener(this)
         cancel!!.setOnClickListener(this)
+
+
     }
 
     override fun onClick(view: View) {
@@ -44,13 +51,18 @@ class CustomDialogNewCategory(val contexte: Context) : Dialog(contexte), View.On
                 {
                     GlobalScope.launch{
                         categoryRepository.insert(Category(0,editText?.text.toString()))
+
                     }
+
+                    Log.d("category", editText?.text.toString())
                 }
-                dismiss()
+
+
             }
             R.id.cancel -> dismiss()
             else -> {}
         }
+
         dismiss()
     }
 }

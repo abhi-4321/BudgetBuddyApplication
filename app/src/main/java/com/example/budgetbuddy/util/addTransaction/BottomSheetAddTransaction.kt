@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.budgetbuddy.databinding.AddTransactionBottomSheetBinding
 import com.example.budgetbuddy.util.category.BottomSheetCategory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+
 
 class BottomSheetAddTransaction : BottomSheetDialogFragment() {
     lateinit var behavior: BottomSheetBehavior<FrameLayout>
@@ -42,10 +44,16 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment() {
                 binding.category.setText(it)
         })
         binding.category.isFocusable = false
+
+
         binding.category.setOnClickListener {
-            val bottomSheetDialog = BottomSheetCategory()
-            bottomSheetDialog.isCancelable = false
-            bottomSheetDialog.show(requireActivity().supportFragmentManager,"Bottom Sheet Category")
+//            val bottomSheetDialog = BottomSheetCategory()
+//            bottomSheetDialog.isCancelable = false
+//            bottomSheetDialog.show(requireActivity().supportFragmentManager,"Bottom Sheet Category")
+
+            val bottomSheetCategory = BottomSheetCategory()
+            bottomSheetCategory.setTargetFragment(this, 0)
+            bottomSheetCategory.show(parentFragmentManager, bottomSheetCategory.tag)
         }
 
         return binding.root
@@ -74,6 +82,14 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment() {
             }
 
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(requireContext(), "resume", Toast.LENGTH_SHORT).show()
+    }
+    fun updateCategoryField(selectedCategory: String) {
+        binding.category.setText(selectedCategory)
     }
 
 }
