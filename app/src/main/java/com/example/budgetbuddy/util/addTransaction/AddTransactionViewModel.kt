@@ -1,20 +1,23 @@
 package com.example.budgetbuddy.util.addTransaction
 
-import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.budgetbuddy.util.category.Category
+import com.example.budgetbuddy.util.category.CategoryViewModel
 
-class AddTransactionViewModel(context: Context) : ViewModel() {
+class AddTransactionViewModel : ViewModel() {
 
-    val sharedPreferences = context.getSharedPreferences("Category",MODE_PRIVATE)
+    val category : MutableLiveData<String> = MutableLiveData()
 
-    private val category = MutableLiveData<String>()
-    init {
-        category.apply {
-            value = sharedPreferences.getString("category","")
-        }
+    fun setCategory(str : String) {
+        category.value = str
     }
-    val _category : LiveData<String> = category
+
+    fun getCategory() : LiveData<String> {
+        return category
+    }
+
+
+
 }

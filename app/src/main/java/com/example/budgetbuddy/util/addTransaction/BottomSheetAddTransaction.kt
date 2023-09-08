@@ -8,8 +8,14 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.AddTransactionBottomSheetBinding
+import com.example.budgetbuddy.repository.CategoryRepository
+import com.example.budgetbuddy.ui.main.MainActivity
 import com.example.budgetbuddy.util.category.BottomSheetCategory
+import com.example.budgetbuddy.util.category.CategoryAdapter
+import com.example.budgetbuddy.util.category.CategoryViewModel
+import com.example.budgetbuddy.util.category.CategoryViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -21,13 +27,10 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment() {
 
     private fun getWindowHeight() =resources.displayMetrics.heightPixels
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this,
-            AddTransactionViewModelFactory(requireContext())
-        )[AddTransactionViewModel::class.java]
-
+        viewModel = ViewModelProvider(requireActivity())[AddTransactionViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -40,7 +43,8 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment() {
         binding.close.setOnClickListener {
             dialog?.cancel()
         }
-        viewModel._category.observe(this, Observer {
+
+        viewModel.getCategory().observe(requireActivity(), Observer {
                 binding.category.setText(it)
         })
         binding.category.isFocusable = false

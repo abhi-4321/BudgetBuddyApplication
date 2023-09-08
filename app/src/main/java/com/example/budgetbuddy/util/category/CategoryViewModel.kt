@@ -1,17 +1,12 @@
 package com.example.budgetbuddy.util.category
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.content.Context
+import androidx.lifecycle.*
 import com.example.budgetbuddy.repository.CategoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CategoryViewModel(private val categoryRepository: CategoryRepository) : ViewModel() {
-
-    fun getCategories() : LiveData<List<Category>> {
-        return categoryRepository.getCategories()
-    }
+open class CategoryViewModel(private val categoryRepository: CategoryRepository) : ViewModel() {
 
     fun delete(category: Category) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -25,4 +20,7 @@ class CategoryViewModel(private val categoryRepository: CategoryRepository) : Vi
         }
     }
 
+    fun getCategories() : LiveData<List<Category>> {
+        return categoryRepository.getCategories()
+    }
 }

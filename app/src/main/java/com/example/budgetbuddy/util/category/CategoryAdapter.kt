@@ -46,17 +46,16 @@ class CategoryAdapter(
         } else {
             holder.itemView.setOnClickListener {
 
-                val sharedPreferences = context.getSharedPreferences("Category", MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
-                editor.putString("category", arrayList[position].category)
-                editor.apply()
-                clickListener.onItemClick(position)
-
+//                val sharedPreferences = context.getSharedPreferences("Category", MODE_PRIVATE)
+//                val editor = sharedPreferences.edit()
+//                editor.putString("category", arrayList[position].category)
+//                editor.apply()
+                clickListener.onItemClick(arrayList[position].category!!)
             }
         }
     }
 
     interface ClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(category : String)
     }
 }
