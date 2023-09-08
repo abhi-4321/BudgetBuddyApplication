@@ -6,4 +6,94 @@
     android:orientation="vertical"
     >
 
+   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+       android:id="@+id/swipeRefreshLayout"
+       android:layout_width="match_parent"
+       android:layout_marginTop="@dimen/_25sdp"
+       android:layout_height="match_parent">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+
+         android:orientation="vertical">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:text="₹3,000"
+               android:layout_marginStart="@dimen/_10sdp"
+               android:textStyle="bold"
+               android:textSize="@dimen/_20sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:text="Your Current Balance"
+               android:layout_marginStart="@dimen/_10sdp"
+               android:textSize="@dimen/_10sdp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+               android:orientation="horizontal">
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:text="Inflow"
+                android:layout_marginBottom="@dimen/_2sdp"
+               android:layout_marginStart="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outflow"
+                android:layout_marginStart="@dimen/_10sdp"/>
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginRight="@dimen/_10sdp"
+                 android:gravity="right"
+                  android:orientation="vertical">
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="@dimen/_2sdp"
+                      android:textColor="#079737"
+                    android:text="+10,000"
+                     />
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="#BC1010"
+                      android:text="-5,000"
+                      />
+                 <View
+                     android:layout_width="@dimen/_80sdp"
+                     android:layout_height="1dp"
+                    android:background="#E1DFDF"/>
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="@dimen/_2sdp"
+                      android:text="5,000"
+                      />
+
+               </LinearLayout>
+            </LinearLayout>
+         </LinearLayout>
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none"/>
+      </LinearLayout>
+   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </LinearLayout>
