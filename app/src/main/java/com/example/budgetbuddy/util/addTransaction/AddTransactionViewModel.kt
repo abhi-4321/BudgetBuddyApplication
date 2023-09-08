@@ -18,6 +18,4 @@ class AddTransactionViewModel : ViewModel() {
         return category
     }
 
-
-
 }
