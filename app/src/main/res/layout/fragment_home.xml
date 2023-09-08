@@ -246,7 +246,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg"
-                android:backgroundTint="@android:color/transparent"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -255,6 +254,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabGravity="fill"
+                    android:background="#F7F7F7"
                     app:tabIndicatorColor="@color/colorAccent"
                     app:tabMode="fixed"
                     app:tabTextColor="@color/tab_unselected_color" />
