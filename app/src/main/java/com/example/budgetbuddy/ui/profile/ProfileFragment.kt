@@ -30,7 +30,6 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater)
 
-
         return binding.root
     }
 

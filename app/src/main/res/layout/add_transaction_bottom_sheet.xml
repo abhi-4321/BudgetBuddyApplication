@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".ui.TestActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,288 +13,338 @@
         android:background="@color/white">
 
 
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/baseline_close_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/close"
-        android:layout_width="@dimen/_18sdp"
-        android:layout_height="@dimen/_18sdp"
-        android:src="@drawable/baseline_close_24"
-        android:layout_marginStart="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <TextView
-        android:id="@+id/title"
-        android:text="Add Transaction"
-        android:textStyle="bold"
-        android:textSize="@dimen/_16ssp"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_15sdp"
-        app:layout_constraintStart_toEndOf="@id/close"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:text="Add Transaction"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/close"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/done"
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:src="@drawable/submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="@dimen/_10sdp"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-
-        android:orientation="vertical">
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        app:counterEnabled="true"
-        app:counterMaxLength="10"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        app:endIconMode="clear_text"
-
-        app:boxStrokeColor="@color/boxStrokeColorFocused"
-        app:hintTextColor="@color/boxStrokeColorFocused"
-        android:layout_height="wrap_content"
-        android:hint="Amount">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="11"
-           />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/boxStrokeColorFocused"
-        app:hintTextColor="@color/boxStrokeColorFocused"
-        android:layout_height="wrap_content"
-        android:hint="Remark">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittextbg"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:gravity="center|left"
-            android:orientation="horizontal">
-        <ImageView
-            android:layout_width="@dimen/_23sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:src="@drawable/paperclip"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_10sdp"
-            android:textColor="@color/boxStrokeColorFocused"
-            android:layout_marginHorizontal="@dimen/_7sdp"
-            android:text="Attach image and PDF"/>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_30sdp"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Payment Mode"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:textSize="@dimen/_10sdp"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7ssp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg"
-                android:backgroundTint="#E4E3E3"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                   android:paddingVertical="@dimen/_6sdp"
-                    android:paddingHorizontal="@dimen/_13sdp"
-                    android:textSize="@dimen/_9sdp"
-                    android:text="Cash"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg"
-                android:backgroundTint="#E4E3E3"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_6sdp"
-                    android:paddingHorizontal="@dimen/_13sdp"
-                    android:textSize="@dimen/_9sdp"
-                    android:text="Online"/>
-            </LinearLayout>
-        </LinearLayout>
-        </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_15ssp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            app:endIconMode="clear_text"
-            app:boxStrokeColor="@color/boxStrokeColorFocused"
-            app:hintTextColor="@color/boxStrokeColorFocused"
-            android:layout_height="wrap_content"
-            android:hint="Category">
-            <com.google.android.material.textfield.TextInputEditText
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15ssp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:hint="Amount"
+                app:boxStrokeColor="@color/boxStrokeColorFocused"
+
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/boxStrokeColorFocused">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="11" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Amount In or Out"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:textSize="@dimen/_10sdp"/>
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:hint="Remark"
+                app:boxStrokeColor="@color/boxStrokeColorFocused"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/boxStrokeColorFocused">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7ssp"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg"
-                    android:backgroundTint="#E4E3E3"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="@dimen/_6sdp"
-                        android:paddingHorizontal="@dimen/_13sdp"
-                        android:textSize="@dimen/_9sdp"
-                        android:text="Debit"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg"
-                    android:backgroundTint="#E4E3E3"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="@dimen/_6sdp"
-                        android:paddingHorizontal="@dimen/_13sdp"
-                        android:textSize="@dimen/_9sdp"
-                        android:text="Credit"/>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:orientation="vertical">
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/edittextbg"
+                android:gravity="center|left"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp">
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Date"
-           android:layout_marginLeft="@dimen/_10sdp"
-           android:textSize="@dimen/_10sdp"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:orientation="horizontal">
-           <ImageView
-               android:layout_width="@dimen/_20sdp"
-               android:layout_height="@dimen/_20sdp"
-               android:src="@drawable/calendar"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_10sdp"
-                android:layout_marginLeft="@dimen/_8sdp"
-                android:text="07/08/2001"/>
-        </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:textSize="@dimen/_10sdp"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:gravity="center"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/clock"/>
+                    android:layout_width="@dimen/_23sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/paperclip" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:text="7:30 pm"/>
+                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:text="Attach image and PDF"
+                    android:textColor="@color/boxStrokeColorFocused"
+                    android:textSize="@dimen/_10sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15ssp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Payment Mode"
+                    android:textSize="@dimen/_10sdp" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/cash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg"
+                            android:backgroundTint="#E4E3E3"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="@dimen/_13sdp"
+                                android:paddingVertical="@dimen/_6sdp"
+                                android:text="Cash"
+                                android:textSize="@dimen/_9sdp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:background="@drawable/bg"
+                            android:backgroundTint="#E4E3E3"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cash">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="@dimen/_13sdp"
+                                android:paddingVertical="@dimen/_6sdp"
+                                android:text="Online"
+                                android:textSize="@dimen/_9sdp" />
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </RadioGroup>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15ssp"
+                android:hint="Category"
+
+                app:boxStrokeColor="@color/boxStrokeColorFocused"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/boxStrokeColorFocused">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/category"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15ssp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Amount In or Out"
+                    android:textSize="@dimen/_10sdp" />
+
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/debit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg"
+                            android:backgroundTint="#E4E3E3"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="@dimen/_13sdp"
+                                android:paddingVertical="@dimen/_6sdp"
+                                android:text="Debit"
+                                android:textSize="@dimen/_9sdp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:background="@drawable/bg"
+                            android:backgroundTint="#E4E3E3"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/debit">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="@dimen/_13sdp"
+                                android:paddingVertical="@dimen/_6sdp"
+                                android:text="Credit"
+                                android:textSize="@dimen/_9sdp" />
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:text="Date"
+                    android:textSize="@dimen/_10sdp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/calendar" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:text="07/08/2001"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Time"
+                    android:textSize="@dimen/_10sdp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/clock" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:text="7:30 pm"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
     </ScrollView>
-    </LinearLayout>
+</LinearLayout>

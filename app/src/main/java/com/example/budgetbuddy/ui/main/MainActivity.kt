@@ -1,7 +1,8 @@
 package com.example.budgetbuddy.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.ActivityMainBinding
@@ -9,7 +10,8 @@ import com.example.budgetbuddy.ui.budget.BudgetFragment
 import com.example.budgetbuddy.ui.home.HomeFragment
 import com.example.budgetbuddy.ui.profile.ProfileFragment
 import com.example.budgetbuddy.ui.transactions.TransactionsFragment
-import com.example.budgetbuddy.util.BottomSheetAddTransaction
+import com.example.budgetbuddy.util.addTransaction.BottomSheetAddTransaction
+
 
 class MainActivity : AppCompatActivity() {
 

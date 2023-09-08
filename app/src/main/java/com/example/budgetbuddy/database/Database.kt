@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.budgetbuddy.ui.profile.User
+import com.example.budgetbuddy.util.category.Category
 
-@androidx.room.Database(version = 1, entities = [User::class], exportSchema = false)
+@androidx.room.Database(version = 1, entities = [User::class, Category::class], exportSchema = false)
 abstract class Database : RoomDatabase(){
 
     abstract fun userDao() : UserDao
+    abstract fun categoryDao() : CategoryDao
 
     companion object{
 
