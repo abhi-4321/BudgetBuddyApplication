@@ -1,24 +1,20 @@
 package com.example.budgetbuddy.util.category
 
-import android.content.ContentValues.TAG
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.CategoryBottomSheetBinding
 import com.example.budgetbuddy.repository.CategoryRepository
-import com.example.budgetbuddy.util.addTransaction.AddTransactionViewModel
+import com.example.budgetbuddy.util.addTransaction.SharedTransactionViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -27,7 +23,7 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener,Category
     lateinit var behavior: BottomSheetBehavior<FrameLayout>
     lateinit var binding:CategoryBottomSheetBinding
     private var arrayList = ArrayList<Category>()
-    private lateinit var addTransactionViewModel: AddTransactionViewModel
+    private lateinit var sharedTransactionViewModel: SharedTransactionViewModel
     private lateinit var viewModel : CategoryViewModel
 
     private fun getWindowHeight() =resources.displayMetrics.heightPixels
@@ -42,7 +38,7 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener,Category
         val categoryRepository = CategoryRepository(categoryDao)
 
         viewModel = ViewModelProvider(this,CategoryViewModelFactory(categoryRepository))[CategoryViewModel::class.java]
-        addTransactionViewModel = ViewModelProvider(requireActivity())[AddTransactionViewModel::class.java]
+        sharedTransactionViewModel = ViewModelProvider(requireActivity())[SharedTransactionViewModel::class.java]
 
         binding= CategoryBottomSheetBinding.inflate(layoutInflater)
         binding.close.setOnClickListener {
@@ -269,12 +265,12 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener,Category
             }
         }
 
-        addTransactionViewModel.setCategory(category)
+        sharedTransactionViewModel.setCategory(category)
         dismiss()
     }
 
     override fun onItemClick(category: String) {
-        addTransactionViewModel.setCategory(category)
+        sharedTransactionViewModel.setCategory(category)
         dismiss()
     }
 

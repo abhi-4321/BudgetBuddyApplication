@@ -1,21 +1,31 @@
 package com.example.budgetbuddy.util.addTransaction
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.budgetbuddy.util.category.Category
-import com.example.budgetbuddy.util.category.CategoryViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.budgetbuddy.repository.TransactionRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class AddTransactionViewModel : ViewModel() {
+class AddTransactionViewModel(private val transactionRepository: TransactionRepository) : ViewModel() {
 
-    val category : MutableLiveData<String> = MutableLiveData()
-
-    fun setCategory(str : String) {
-        category.value = str
+    fun insert(transaction : Transaction)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            transactionRepository.insert(transaction)
+        }
     }
 
-    fun getCategory() : LiveData<String> {
-        return category
+    fun delete(transaction : Transaction)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            transactionRepository.delete(transaction)
+        }
+    }
+
+    fun getTransactions() : LiveData<List<Transaction>>
+    {
+        return transactionRepository.getTransactions()
     }
 
 }

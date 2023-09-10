@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,8 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
-            android:paddingBottom="@dimen/_30sdp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_30sdp">
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -74,6 +74,7 @@
                 app:hintTextColor="@color/boxStrokeColorFocused">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -91,6 +92,7 @@
                 app:hintTextColor="@color/boxStrokeColorFocused">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/remark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -99,6 +101,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
+                android:id="@+id/action_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -114,9 +117,13 @@
                     android:src="@drawable/paperclip" />
 
                 <TextView
+                    android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/_170sdp"
+                    android:maxLines="1"
                     android:text="Attach image and PDF"
                     android:textColor="@color/boxStrokeColorFocused"
                     android:textSize="@dimen/_10sdp" />
@@ -135,59 +142,72 @@
                     android:text="Payment Mode"
                     android:textSize="@dimen/_10sdp" />
 
-                <RadioGroup
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_7ssp"
+                    android:elevation="@dimen/_10sdp"
+                    android:orientation="horizontal">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/CardView1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_7ssp"
-                        android:orientation="horizontal">
+                        android:layout_height="@dimen/_22sdp"
+                        android:backgroundTint="#E4E3E3"
+                        android:focusable="true"
+                        app:cardCornerRadius="@dimen/_20sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
+                        <RadioButton
+                            android:id="@+id/cashRdo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/timeselector"
+                            android:button="@android:color/transparent" />
+
+                        <TextView
                             android:id="@+id/cash"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg"
-                            android:backgroundTint="#E4E3E3"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_20sdp"
+                            android:text="Cash"
+                            android:textSize="@dimen/_9ssp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingHorizontal="@dimen/_13sdp"
-                                android:paddingVertical="@dimen/_6sdp"
-                                android:text="Cash"
-                                android:textSize="@dimen/_9sdp" />
-                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                        <LinearLayout
-                            android:id="@+id/linearLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:background="@drawable/bg"
-                            android:backgroundTint="#E4E3E3"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/cash">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/CardView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_22sdp"
+                        android:backgroundTint="#E4E3E3"
+                        android:focusable="true"
+                        app:cardCornerRadius="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintStart_toEndOf="@id/CardView1"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingHorizontal="@dimen/_13sdp"
-                                android:paddingVertical="@dimen/_6sdp"
-                                android:text="Online"
-                                android:textSize="@dimen/_9sdp" />
-                        </LinearLayout>
+                        <RadioButton
+                            android:id="@+id/onlineRdo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/timeselector"
+                            android:button="@android:color/transparent" />
 
+                        <TextView
+                            android:id="@+id/online"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_20sdp"
+                            android:text="Online"
+                            android:textSize="@dimen/_9ssp" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </RadioGroup>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -196,6 +216,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15ssp"
+                android:clickable="true"
+                android:focusable="false"
                 android:hint="Category"
 
                 app:boxStrokeColor="@color/boxStrokeColorFocused"
@@ -203,9 +225,9 @@
                 app:hintTextColor="@color/boxStrokeColorFocused">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/category"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -222,57 +244,72 @@
                     android:text="Amount In or Out"
                     android:textSize="@dimen/_10sdp" />
 
-
-                <RadioGroup
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_7ssp"
+                    android:elevation="@dimen/_10sdp"
+                    android:orientation="horizontal">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_7ssp"
-                        android:orientation="horizontal">
+                        android:layout_height="@dimen/_22sdp"
+                        android:backgroundTint="#E4E3E3"
+                        android:focusable="true"
+                        app:cardCornerRadius="@dimen/_20sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
+                        <RadioButton
+                            android:id="@+id/debitRdo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/timeselector"
+                            android:button="@android:color/transparent" />
+
+                        <TextView
                             android:id="@+id/debit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg"
-                            android:backgroundTint="#E4E3E3"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_20sdp"
+                            android:text="Debit"
+                            android:textSize="@dimen/_9ssp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingHorizontal="@dimen/_13sdp"
-                                android:paddingVertical="@dimen/_6sdp"
-                                android:text="Debit"
-                                android:textSize="@dimen/_9sdp" />
-                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:background="@drawable/bg"
-                            android:backgroundTint="#E4E3E3"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/debit">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_22sdp"
+                        android:backgroundTint="#E4E3E3"
+                        android:focusable="true"
+                        app:cardCornerRadius="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintStart_toEndOf="@id/materialCardView1"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingHorizontal="@dimen/_13sdp"
-                                android:paddingVertical="@dimen/_6sdp"
-                                android:text="Credit"
-                                android:textSize="@dimen/_9sdp" />
-                        </LinearLayout>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </RadioGroup>
+                        <RadioButton
+                            android:id="@+id/creditRdo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/timeselector"
+                            android:button="@android:color/transparent" />
+
+                        <TextView
+                            android:id="@+id/credit"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_20sdp"
+                            android:text="Credit"
+                            android:textSize="@dimen/_9ssp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -302,13 +339,13 @@
                         android:src="@drawable/calendar" />
 
                     <TextView
-                        android:gravity="center_vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-                        android:background="@drawable/custom_textbox"
                         android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/_10sdp"
+                        android:background="@drawable/custom_textbox"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="@dimen/_10sdp"
                         android:text="Select Date"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
@@ -341,14 +378,14 @@
                         android:src="@drawable/clock" />
 
                     <TextView
-                        android:background="@drawable/custom_textbox"
                         android:id="@+id/time"
-                        android:gravity="center_vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="7:30 pm"
+                        android:background="@drawable/custom_textbox"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:text="Select Time"
                         android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
             </LinearLayout>

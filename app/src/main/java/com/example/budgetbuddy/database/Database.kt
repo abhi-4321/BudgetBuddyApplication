@@ -4,13 +4,15 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.budgetbuddy.ui.profile.User
+import com.example.budgetbuddy.util.addTransaction.Transaction
 import com.example.budgetbuddy.util.category.Category
 
-@androidx.room.Database(version = 1, entities = [User::class, Category::class], exportSchema = false)
+@androidx.room.Database(version = 1, entities = [User::class, Category::class, Transaction::class], exportSchema = false)
 abstract class Database : RoomDatabase(){
 
     abstract fun userDao() : UserDao
     abstract fun categoryDao() : CategoryDao
+    abstract fun transactionDao() : TransactionDao
 
     companion object{
 
@@ -23,7 +25,7 @@ abstract class Database : RoomDatabase(){
                 synchronized(this){
                     INSTANCE = Room.databaseBuilder(context,
                         Database::class.java,
-                        "database").build()
+                        "mydata").build()
                 }
             }
             return INSTANCE!!
