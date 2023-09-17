@@ -1,5 +1,6 @@
 package com.example.budgetbuddy.ui.budget
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -34,6 +35,25 @@ class BudgetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBudgetBinding.inflate(inflater,container, false)
+
+
+        binding.btn.setOnClickListener {
+           var intent = Intent(requireContext(), CreateBudgetActivity::class.java)
+            startActivity(intent)
+        }
+
+       binding.floatingActionBtn.setOnClickListener {
+           var intent = Intent(requireContext(), CreateBudgetActivity::class.java)
+           startActivity(intent)
+       }
+
+        //circular progress bar
+        binding.circularProgressBar.apply {
+            progressMax = 100f
+            setProgressWithAnimation(50f, 1000)
+            roundBorder = true
+
+        }
 
 
         return binding.root
