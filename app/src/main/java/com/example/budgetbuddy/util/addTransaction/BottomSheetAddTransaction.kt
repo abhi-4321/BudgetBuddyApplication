@@ -1,9 +1,13 @@
 package com.example.budgetbuddy.util.addTransaction
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.DrawableWrapper
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,12 +22,14 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.AddTransactionBottomSheetBinding
 import com.example.budgetbuddy.repository.TransactionRepository
+import com.example.budgetbuddy.ui.transactions.Drawables
 import com.example.budgetbuddy.util.category.BottomSheetCategory
 import com.example.budgetbuddy.util.date.DatePicker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.Integer.parseInt
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -34,9 +40,8 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
     lateinit var addTransactionViewModel: AddTransactionViewModel
     private var selectedModeTextView : TextView? = null
     private var selectedTextView : TextView? = null
-
+    private var it : Int = 0
     private fun getWindowHeight() = resources.displayMetrics.heightPixels
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,9 +67,17 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
             dismiss()
         }
 
+        binding.date.text = SimpleDateFormat("dd MMMM yyyy").format(System.currentTimeMillis()).toString()
+
         viewModel.getCategory().observe(requireActivity(), Observer {
             binding.category.setText(it)
         })
+        viewModel.getIcon().observe(requireActivity(), Observer {
+            this.it=it
+            val icon : Int? = Drawables.asRes(it)
+            binding.icon.setImageResource(icon!!)
+        })
+
         binding.category.isFocusable = false
         binding.category.setOnClickListener {
             val bottomSheetDialog = BottomSheetCategory()
@@ -79,6 +92,8 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
         val currentHour = parseInt(cal.get(Calendar.HOUR).toString())
         val currentMin = parseInt(cal.get(Calendar.MINUTE).toString())
 
+        binding.time.text = SimpleDateFormat("hh : mm a").format(System.currentTimeMillis())
+
         val timePickerDialogListener: TimePickerDialog.OnTimeSetListener =
             TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute -> // logic to properly handle
                 // the picked timings by user
@@ -87,7 +102,7 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
                         if (minute < 10) {
                             "${hourOfDay + 12} : 0${minute} am"
                         } else {
-                            "${hourOfDay + 12}:${minute} am"
+                            "${hourOfDay + 12} : ${minute} am"
                         }
                     }
                     hourOfDay in 1..9 -> {
@@ -168,6 +183,7 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
         addTransactionViewModel.insert(
             Transaction(
                 0,
+                it,
                 binding.amount.text.toString(),
                 binding.remark.text.toString(),
                 binding.text.text.toString(),
@@ -207,14 +223,15 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
         })
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onDateSet(p0: android.widget.DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         val mCalendar: Calendar = Calendar.getInstance()
         mCalendar.set(Calendar.YEAR, year)
         mCalendar.set(Calendar.MONTH, month)
         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        val dateFormat = SimpleDateFormat("dd MMMM yyyy")
         val selectedDate: String =
-            DateFormat.getDateInstance(DateFormat.DEFAULT).format(mCalendar.time)
-        Toast.makeText(context, selectedDate, Toast.LENGTH_SHORT).show()
+            dateFormat.format(mCalendar.time)
         binding.date.text = selectedDate
     }
 
@@ -234,7 +251,6 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
     }
 
     private fun loadImageFromGallery() {
-        Toast.makeText(context, "hi2", Toast.LENGTH_SHORT).show()
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).also {
             it.addCategory(Intent.CATEGORY_OPENABLE)
             it.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -255,21 +271,16 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
                     binding.cashRdo.isChecked = false
                     selectedModeTextView=binding.online
                 }
-                else -> {
-                    when (p0?.id) {
-                        R.id.debitRdo -> {
-                            binding.creditRdo.isChecked = false
-                            selectedTextView=binding.debit
-                        }
-                        R.id.creditRdo -> {
-                            binding.debitRdo.isChecked = false
-                            selectedTextView=binding.credit
-                        }
-                    }
+                R.id.debitRdo -> {
+                    binding.creditRdo.isChecked = false
+                    selectedTextView=binding.debit
+                }
+                R.id.creditRdo -> {
+                    binding.debitRdo.isChecked = false
+                    selectedTextView=binding.credit
                 }
             }
         }
     }
-
-
 }
+
