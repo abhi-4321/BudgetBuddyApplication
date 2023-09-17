@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.budgetbuddy.util.addTransaction.Transaction
 
-class TransactioSectionDecoration(private val context: Context,
-                                  private val getItemList: ()-> MutableList<TransactionModel>)
+class TransactionSectionDecoration(private val context: Context,
+                                   private val getItemList: () -> ArrayList<Transaction>
+)
     :RecyclerView.ItemDecoration() {
 
     private val dividerHeight = dipToPx(context, 0.8f)

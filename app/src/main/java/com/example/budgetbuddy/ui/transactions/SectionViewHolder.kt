@@ -16,7 +16,7 @@ class SectionViewHolder(context: Context):FrameLayout(context) {
         textViewDate =findViewById(R.id.textviewDate)
     }
     fun setDate(dateString: String){
-        textViewDate.text = dateString
+        textViewDate.text = dateString.substring(3)
     }
 
 }

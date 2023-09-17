@@ -15,5 +15,6 @@
     <color name="boxStrokeColorFocused">#317773</color>
 
     <color name="line">#cacaca</color>
+    <color name="green">#118104</color>
 
 </resources>

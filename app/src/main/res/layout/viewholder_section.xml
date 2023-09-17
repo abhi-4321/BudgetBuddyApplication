@@ -9,7 +9,6 @@ android:layout_marginTop="@dimen/_10sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="August 2023"
-
         android:id="@+id/textviewDate"
         android:layout_marginStart="@dimen/_10sdp"
         android:textSize="@dimen/_10sdp"
