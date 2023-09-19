@@ -94,7 +94,7 @@
                 android:layout_gravity="center|right"
                 android:layout_marginEnd="@dimen/_1sdp"
                 android:text="+"
-                android:textColor="@color/green"
+                android:textColor="#4CAF50"
 
                 />
 
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:textColor="@color/green"
+                android:textColor="#4CAF50"
                 tools:text="1000" />
 
         </LinearLayout>
