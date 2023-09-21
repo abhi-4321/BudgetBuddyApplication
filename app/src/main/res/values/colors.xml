@@ -15,5 +15,6 @@
     <color name="boxStrokeColorFocused">#317773</color>
 
     <color name="line">#F7F7F7</color>
+    <color name="green">#118104</color>
 
 </resources>

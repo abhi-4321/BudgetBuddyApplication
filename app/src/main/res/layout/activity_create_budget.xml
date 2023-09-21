@@ -1694,6 +1694,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/recycler"
                     android:scrollbars="none"
+                    tools:listitem="@layout/custom_category"
                     />
 
             </LinearLayout>

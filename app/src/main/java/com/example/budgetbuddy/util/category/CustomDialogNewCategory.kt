@@ -18,13 +18,13 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class CustomDialogNewCategory(val contexte: Context) : Dialog(contexte), View.OnClickListener {
+class CustomDialogNewCategory(context : Context) : Dialog(context), View.OnClickListener {
 
     var add: MaterialButton? = null
     var cancel:MaterialButton? = null
     var editText : EditText?= null
 
-    val catDao = Database.getInstance(contexte).categoryDao()
+    val catDao = Database.getInstance(context).categoryDao()
     val categoryRepository = CategoryRepository(catDao)
 
     override fun onCreate(savedInstanceState: Bundle?) {

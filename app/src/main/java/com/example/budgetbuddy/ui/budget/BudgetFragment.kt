@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentBudgetBinding
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
@@ -27,7 +29,7 @@ class BudgetFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[BudgetViewModel::class.java]
+        viewModel = ViewModelProvider(this)[BudgetViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -35,7 +37,13 @@ class BudgetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBudgetBinding.inflate(inflater,container, false)
+        binding.recycler.layoutManager = LinearLayoutManager(context)
 
+        viewModel.getBudgets().observe(viewLifecycleOwner, Observer {
+            val adapter = BudgetAdapter(it,requireContext())
+            binding.recycler.adapter = adapter
+            adapter.notifyDataSetChanged()
+        })
 
         binding.btn.setOnClickListener {
            var intent = Intent(requireContext(), CreateBudgetActivity::class.java)
