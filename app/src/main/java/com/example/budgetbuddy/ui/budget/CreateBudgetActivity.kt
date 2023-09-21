@@ -3,60 +3,128 @@ package com.example.budgetbuddy.ui.budget
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.View.inflate
 import android.widget.Button
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.R
-import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.ActivityCreateBudgetBinding
-import com.example.budgetbuddy.repository.BudgetRepository
 
-class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
+class CreateBudgetActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateBudgetBinding
-    private lateinit var budgetViewModel: BudgetViewModel
-    private lateinit var sharedViewModel : SharedViewModel
-    private lateinit var dialog : CustomDialogSetBudget
-    private var icon : Int = 0
-    private var category : String? = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateBudgetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val budgetDao = Database.getInstance(this).budgetDao()
-        val budgetRepository = BudgetRepository(budgetDao)
-        budgetViewModel = ViewModelProvider(this,BudgetViewModelFactory(budgetRepository))[BudgetViewModel::class.java]
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.set_budget_dilog)
 
-        sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
-
-        dialog = CustomDialogSetBudget(this,this)
-
-        binding.foodBtn.setOnClickListener(this)
-
-        binding.recycler.layoutManager = LinearLayoutManager(this)
-    }
-
-    inner class BudgetViewModelFactory(private val budgetRepository: BudgetRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return BudgetViewModel(budgetRepository) as T
+        binding.foodBtn.setOnClickListener {
+            dialog.show()
         }
-    }
-
-    override fun onClick(p0: View?) {
-        dialog.show()
-
-        when(p0?.id) {
-            R.id.food -> {
-                category = "Food & Beverages"
-                icon=0
-            }
+        binding.transportationBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.rentals.setOnClickListener {
+            dialog.show()
+        }
+        binding.waterBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.phoneBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.electricitybill.setOnClickListener {
+            dialog.show()
+        }
+        binding.gasBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.telivisionBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.internetBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.otherUtilityBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.homeMaintainenceBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.vehicleMaintainenceBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.medialCheckupBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.insuranceBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.educationBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.houseWareBill.setOnClickListener {
+            dialog.show()
+        }
+        binding.personalItemsbills.setOnClickListener {
+            dialog.show()
+        }
+        binding.petsBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.homeServiceBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.otherExpenseBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.fitnessBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.makeupBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.giftAndDonationBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.stremingServicesBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.funZoneBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.investmentBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.debtCollectBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.debtBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.loanbills.setOnClickListener {
+            dialog.show()
+        }
+        binding.repaymentBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.payInterestBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.collectInterestBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.salaryBills.setOnClickListener {
+            dialog.show()
+        }
+        binding.otherIncomeBills.setOnClickListener {
+            dialog.show()
+        }
+        val cancelBtn = dialog.findViewById<Button>(R.id.cancelButton)
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
         }
 
-        sharedViewModel.setCategory(category!!)
-        sharedViewModel.setIcon(icon)
+
     }
 }

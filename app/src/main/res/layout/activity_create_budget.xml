@@ -147,6 +147,7 @@
                         android:gravity="right"
                         >
                         <LinearLayout
+                            android:id="@+id/transportationBills"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="@dimen/_15ssp"
@@ -194,6 +195,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/rentals"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -239,6 +241,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/waterBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -284,6 +287,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/phoneBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -329,6 +333,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/electricitybill"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -374,6 +379,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/gasBill"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -419,6 +425,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/telivisionBill"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -465,6 +472,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="@dimen/_15ssp"
+                            android:id="@+id/internetBill"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
                             <TextView
@@ -511,6 +519,7 @@
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
+                            android:id="@+id/otherUtilityBill"
                             android:background="@drawable/edittextbg">
                             <TextView
                                 android:layout_width="wrap_content"
@@ -571,6 +580,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/homeMaintainenceBill"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -616,6 +626,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/vehicleMaintainenceBill"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -661,6 +672,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/medialCheckupBill"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -706,6 +718,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/insuranceBill"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -752,6 +765,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="@dimen/_15ssp"
+                            android:id="@+id/educationBills"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
                             <TextView
@@ -796,6 +810,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/houseWareBill"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -842,6 +857,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="@dimen/_15ssp"
+                            android:id="@+id/personalItemsbills"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
                             <TextView
@@ -880,12 +896,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         android:layout_marginRight="@dimen/_10sdp"
                         android:gravity="right"
                         >
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/petsBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -931,6 +949,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/homeServiceBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -976,6 +995,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/otherExpenseBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1041,6 +1061,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/fitnessBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1086,6 +1107,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/makeupBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1131,6 +1153,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/giftAndDonationBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1176,6 +1199,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/stremingServicesBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1221,6 +1245,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/funZoneBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1283,6 +1308,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/investmentBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1328,6 +1354,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/debtCollectBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1373,6 +1400,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/debtBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1418,6 +1446,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/loanbills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1463,6 +1492,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/repaymentBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1508,6 +1538,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/payInterestBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1555,6 +1586,7 @@
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
+                            android:id="@+id/collectInterestBills"
                             android:background="@drawable/edittextbg">
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1615,6 +1647,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/salaryBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
@@ -1660,6 +1693,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/otherIncomeBills"
                             android:paddingHorizontal="@dimen/_15ssp"
                             android:paddingVertical="@dimen/_8ssp"
                             android:background="@drawable/edittextbg">
