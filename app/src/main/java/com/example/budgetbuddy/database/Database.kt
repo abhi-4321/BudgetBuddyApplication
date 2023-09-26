@@ -23,6 +23,8 @@ abstract class Database : RoomDatabase(){
     abstract fun transactionDao() : TransactionDao
     abstract fun budgetDao() : BudgetDao
 
+    abstract fun createBudgetDao() : CreateBudgetDao
+
     companion object{
 
         @Volatile
