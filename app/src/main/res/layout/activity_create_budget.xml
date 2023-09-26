@@ -4,12 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.budget.CreateBudgetActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.budget.CreateBudgetActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:text="Add Budget"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/close"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/done"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -17,1723 +58,1833 @@
             android:orientation="vertical">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:text="Enter the total income"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:hint="Amount"
-        app:boxStrokeColor="@color/boxStrokeColorFocused"
-
-        app:counterEnabled="true"
-        app:counterMaxLength="10"
-        app:endIconMode="clear_text"
-        app:hintTextColor="@color/boxStrokeColorFocused">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="11" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DFDFDF"
-                android:paddingVertical="@dimen/_3sdp"
-                android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_gravity=""
-                android:layout_marginStart="@dimen/_13sdp"
-                android:text="Required Expense" />
-            </LinearLayout>
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Enter the total income"
+                android:textSize="@dimen/_13sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:hint="Amount"
+                app:boxStrokeColor="@color/boxStrokeColorFocused"
+
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/boxStrokeColorFocused">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="11" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/white"
+                android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/food"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/food" />
+                    android:layout_height="wrap_content"
+                    android:background="#DFDFDF"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/_3sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Food &amp; Beverages" />
+                        android:layout_gravity=""
+                        android:layout_marginStart="@dimen/_13sdp"
+                        android:text="Required Expense" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                       >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/foodBtn"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/food" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Food &amp; Beverages"
+                            android:textSize="@dimen/_12sdp" />
 
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/transport"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/transportation" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Transportation" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
                         <LinearLayout
-                            android:id="@+id/transportationBills"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/foodBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/food"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
+
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/rental"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/rental" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Rentals" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/transportation" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/rentals"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Transportation"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/transportationBills"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/transport"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/water"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/waterbill" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Water Bill" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/rental" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/waterBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Rentals"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/rentals"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/rental"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/phonebill" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Phone Bill" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/waterbill" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/phoneBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Water Bill"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/waterBills"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/water"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/electricity"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/electricitybill" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Electricity Bill" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/phonebill" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/electricitybill"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Phone Bill"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/phoneBills"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/phone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/gas"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/gasbill" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Gas Bill" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/electricitybill" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/gasBill"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Electricity Bill"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/electricitybill"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/electricity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/tvbill" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Television Bill" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/gasbill" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/telivisionBill"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Gas Bill"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/gasBill"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/gas"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/internet"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/wifibill" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Internet Bill" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/tvbill" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:id="@+id/internetBill"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Television Bill"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/telivisionBill"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/otherBill"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/bill" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Other Utility Bills" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/wifibill" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:id="@+id/otherUtilityBill"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Internet Bill"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/internetBill"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/internet"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DFDFDF"
-                android:paddingVertical="@dimen/_3sdp"
-                android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_13sdp"
-                android:text="Up &amp; Comers" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/homeMain"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/homemaintenance" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Home Maintenance" />
-                    <LinearLayout
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/bill" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/homeMaintainenceBill"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Other Utility Bills"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/otherUtilityBill"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/otherBill"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
+
+                </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/vehicleMain"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/vehiclemaintenance" />
+                    android:layout_height="wrap_content"
+                    android:background="#DFDFDF"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/_3sdp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Vehicle Maintenance" />
-                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/vehicleMaintainenceBill"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                        android:layout_marginStart="@dimen/_13sdp"
+                        android:text="Up &amp; Comers" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
 
                 <LinearLayout
-                    android:id="@+id/medicalCheck"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/medicalcheckup" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Medical Check-Up" />
                     <LinearLayout
+
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/homemaintenance" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/medialCheckupBill"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Home Maintenance"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/homeMaintainenceBill"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/homeMain"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/vehiclemaintenance" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Vehicle Maintenance"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/vehicleMaintainenceBill"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/vehicleMain"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/medicalcheckup" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Medical Check-Up"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/medialCheckupBill"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/medicalCheck"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/insurance" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Insurances"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/insuranceBill"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/insurance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/education" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Education"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/educationBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/education"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/houseware" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Houseware"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/houseWareBill"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/houseware"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/personalitems" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Personal Items"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/personalItemsbills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/personal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/pets" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Pets"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/petsBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/pets"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/homeservices" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Home Services"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/homeServiceBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/homeService"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/otherexpense" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Other Expense"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/otherExpenseBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+
+                                    android:id="@+id/otherExpense"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/insurance"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/insurance" />
+                    android:layout_height="wrap_content"
+                    android:background="#DFDFDF"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/_3sdp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Insurances" />
-                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/insuranceBill"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
+                        android:layout_marginStart="@dimen/_13sdp"
+                        android:text="Fun &amp; Relax" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
+                </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/education"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/education" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Education" />
                     <LinearLayout
+
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/fitness" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:id="@+id/educationBills"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Fitness"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/fitnessBills"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/fitness"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/makeup" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Makeup"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/makeupBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/makeup"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/gifts" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Gifts &amp; Donations"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/giftAndDonationBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/gifts"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/streaming" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Streaming Service"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/stremingServicesBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/streaming"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/fungames" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Fun Money"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/funZoneBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/fungames"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/houseware"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/houseware" />
+                    android:layout_height="wrap_content"
+                    android:background="#DFDFDF"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/_3sdp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Houseware" />
-                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/houseWareBill"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                        android:layout_marginStart="@dimen/_13sdp"
+                        android:text="Investment &amp; Debt Payments" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
 
                 <LinearLayout
-                    android:id="@+id/personal"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/personalitems" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Personal Items" />
                     <LinearLayout
+
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/investment" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:id="@+id/personalItemsbills"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Investment"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/investmentBills"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/investment"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/debtcollect" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Debt Collection"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/debtCollectBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/debtCollect"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/debtcollect" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Debt"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/debtBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/debt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/loan" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Loan"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/loanbills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/loan"
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/repaymeny" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Repayment"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/repaymentBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/repayment"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/payintererst" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Pay Interest"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/payInterestBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/payInterest"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/collectinterest" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Collect Interest"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/collectInterestBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/collectInterest"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/pets"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/pets" />
+                    android:layout_height="wrap_content"
+                    android:background="#DFDFDF"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/_3sdp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Pets" />
-                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/petsBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                        android:layout_marginStart="@dimen/_13sdp"
+                        android:text="Income" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
 
                 <LinearLayout
-                    android:id="@+id/homeService"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/homeservices" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Home Services" />
                     <LinearLayout
+
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/salary" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/homeServiceBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Salary"
+                            android:textSize="@dimen/_12sdp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/otherExpense"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/otherexpense" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Other Expense" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/otherExpenseBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/salaryBills"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/salary"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/line" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/income" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Other Income"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
+
+                            <LinearLayout
+                                android:id="@+id/otherIncomeBills"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittextbg"
+                                android:paddingHorizontal="@dimen/_15ssp"
+                                android:paddingVertical="@dimen/_8ssp">
+
+                                <TextView
+                                    android:id="@+id/income"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:text="Set Budget" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DFDFDF"
-                android:paddingVertical="@dimen/_3sdp"
-                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_13sdp"
-                    android:text="Fun &amp; Relax" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/white"
-                android:orientation="vertical">
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="Other" />
 
                 <LinearLayout
-                    android:id="@+id/fitness"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/fitness" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Fitness" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/fitnessBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/makeup"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/makeup" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Makeup" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/makeupBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/gifts"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/gifts" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:textSize="@dimen/_12sdp"
-                        android:text="Gifts &amp; Donations" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/giftAndDonationBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/streaming"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/streaming" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Streaming Service" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/stremingServicesBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/fungames"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/fungames" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Fun Money" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/funZoneBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DFDFDF"
-                android:paddingVertical="@dimen/_3sdp"
-                android:orientation="vertical">
-                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_13sdp"
-                    android:text="Investment &amp; Debt Payments" />
-            </LinearLayout>
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/investment"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/investment" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Investment" />
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/investmentBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/debtCollect"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/debtcollect" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Debt Collection" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/debtCollectBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/debt"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/debtcollect" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Debt" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/debtBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/loan"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/loan" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Loan" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/loanbills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/repayment"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/repaymeny" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Repayment" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/repaymentBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/payInterest"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/payintererst" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Pay Interest" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/payInterestBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/collectInterest"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/collectinterest" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Collect Interest" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:id="@+id/collectInterestBills"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DFDFDF"
-                android:paddingVertical="@dimen/_3sdp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_13sdp"
-                    android:text="Income" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/salary"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/salary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Salary" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/salaryBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:id="@+id/income"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:src="@drawable/income" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Other Income" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:gravity="right"
-                        >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/otherIncomeBills"
-                            android:paddingHorizontal="@dimen/_15ssp"
-                            android:paddingVertical="@dimen/_8ssp"
-                            android:background="@drawable/edittextbg">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="Set Budget"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                        android:scrollbars="none"
+                        tools:listitem="@layout/custom_category" />
 
                 </LinearLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_13sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:text="Other" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler"
-                    android:scrollbars="none"
-                    tools:listitem="@layout/custom_category"
-                    />
-
-            </LinearLayout>
-
-        </LinearLayout>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

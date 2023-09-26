@@ -9,7 +9,6 @@ interface BudgetDao {
 
     @Insert
     suspend fun insert(budget : Budget)
-
     @Delete
     suspend fun delete(budget : Budget)
 

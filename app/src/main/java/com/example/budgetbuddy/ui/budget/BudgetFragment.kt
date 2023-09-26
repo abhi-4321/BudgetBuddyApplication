@@ -12,9 +12,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.R
+import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.FragmentBudgetBinding
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
 import com.example.budgetbuddy.databinding.FragmentProfileBinding
+import com.example.budgetbuddy.repository.BudgetRepository
 import com.example.budgetbuddy.ui.home.HomeViewModel
 
 class BudgetFragment : Fragment() {
@@ -29,7 +31,10 @@ class BudgetFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[BudgetViewModel::class.java]
+
+        val budgetDao = Database.getInstance(requireContext()).budgetDao()
+        val budgetRepository = BudgetRepository(budgetDao)
+        viewModel = ViewModelProvider(this,BudgetViewModelFactory(budgetRepository))[BudgetViewModel::class.java]
     }
 
     override fun onCreateView(
