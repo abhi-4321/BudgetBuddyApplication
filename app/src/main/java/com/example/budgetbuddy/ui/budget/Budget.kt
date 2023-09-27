@@ -5,10 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "budget")
 data class Budget(
-
-    @PrimaryKey(autoGenerate = true)
-    val id : Int,
     val image : Int,
+    @PrimaryKey()
     val category : String,
     val limit : Int,
     val spent : Int

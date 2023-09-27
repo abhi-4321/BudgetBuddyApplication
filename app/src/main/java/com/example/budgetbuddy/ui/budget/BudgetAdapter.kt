@@ -1,5 +1,3 @@
-@file:Suppress("UNREACHABLE_CODE")
-
 package com.example.budgetbuddy.ui.budget
 
 import android.annotation.SuppressLint
@@ -26,6 +24,7 @@ class BudgetAdapter(
             val spent : TextView = item.findViewById(R.id.spent)
             val remaining : TextView = item.findViewById(R.id.remaining)
             val progressBar : ProgressBar = item.findViewById(R.id.budgetProgressBar)
+            val edit : ImageView = item.findViewById(R.id.edit)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,6 +54,11 @@ class BudgetAdapter(
 
             holder.image.setImageResource(icon)
             holder.category.text = arrayList[position].category
+
+            holder.edit.setOnClickListener {
+                val dialog = CustomDialogEdiBudget(arrayList[position].image,arrayList[position].category,context)
+                dialog.show()
+            }
         }
 
 

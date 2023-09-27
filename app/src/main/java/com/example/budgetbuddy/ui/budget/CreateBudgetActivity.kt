@@ -101,7 +101,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
 
         for (budget in map)
         {
-            val budgett = Budget(0,getIcon(budget.key),budget.key,budget.value.toInt(),0)
+            val budgett = Budget(getIcon(budget.key),budget.key,budget.value.toInt(),0)
             budgetViewModel.insert(budgett)
         }
         Toast.makeText(this,"hui",Toast.LENGTH_SHORT).show()
