@@ -1,9 +1,12 @@
 package com.example.budgetbuddy.ui.budget
 
+import android.os.Parcel
+import android.support.v4.os.IResultReceiver._Parcel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
+@Suppress("PropertyName")
 class SharedViewModel : ViewModel() {
 
     private val pair : MutableLiveData<Pair<String,String>> = MutableLiveData()
@@ -16,7 +19,7 @@ class SharedViewModel : ViewModel() {
         return pair
     }
 
-    val _icon : MutableLiveData<Int> = MutableLiveData()
+    private val _icon : MutableLiveData<Int> = MutableLiveData()
     fun setIcon(icon : Int) {
         _icon.value = icon
     }
@@ -24,7 +27,7 @@ class SharedViewModel : ViewModel() {
         return _icon
     }
 
-    val _category : MutableLiveData<String> = MutableLiveData()
+    private val _category : MutableLiveData<String> = MutableLiveData()
 
     fun setCategory(category : String) {
         _category.value = category
@@ -33,11 +36,7 @@ class SharedViewModel : ViewModel() {
     fun getCategory() : LiveData<String> {
         return _category
     }
-    val _amount : MutableLiveData<String> = MutableLiveData()
-
-    fun getAmount() : LiveData<String> {
-        return _amount
-    }
+    private val _amount : MutableLiveData<String> = MutableLiveData()
 
     fun setAmount(amount: String) {
         _amount.value = amount

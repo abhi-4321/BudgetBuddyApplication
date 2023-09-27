@@ -11,5 +11,5 @@ data class Budget(
     val image : Int,
     val category : String,
     val limit : Int,
-    val spent : Int,
+    val spent : Int
 )

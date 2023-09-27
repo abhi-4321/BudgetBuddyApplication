@@ -1,26 +1,27 @@
 package com.example.budgetbuddy.ui.budget
 
-import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import android.view.View
-import android.view.View.inflate
-import android.widget.Button
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.ActivityCreateBudgetBinding
 import com.example.budgetbuddy.repository.BudgetRepository
 
+
 class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
     private lateinit var binding: ActivityCreateBudgetBinding
     private lateinit var viewModel: SharedViewModel
     private lateinit var dialog : CustomDialogSetBudget
     private lateinit var budgetViewModel: BudgetViewModel
-    val map = HashMap<String,String>()
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: Editor
+    private val map = HashMap<String,String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateBudgetBinding.inflate(layoutInflater)
@@ -34,6 +35,9 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
 
         binding.done.setOnClickListener {
             insert()
+            val resultIntent = Intent()
+            resultIntent.putExtra("keyName", binding.amount.text.toString())
+            setResult(RESULT_OK, resultIntent)
             finish()
         }
 
@@ -48,7 +52,6 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
             map[cat] = amount
             setView(cat,amount)
         }
-
 
         dialog = CustomDialogSetBudget(this,this)
 
@@ -89,6 +92,13 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
     }
 
     private fun insert() {
+
+        sharedPreferences = getSharedPreferences("Income", MODE_PRIVATE)
+        sharedPreferences.getString("Amount","")
+        editor = sharedPreferences.edit()
+        editor.putString("Amount",binding.amount.text.toString())
+        editor.apply()
+
         for (budget in map)
         {
             val budgett = Budget(0,getIcon(budget.key),budget.key,budget.value.toInt(),0)
@@ -96,7 +106,6 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
         }
         Toast.makeText(this,"hui",Toast.LENGTH_SHORT).show()
     }
-
     private fun setView(cat : String , amount : String) {
         when(cat) {
             "Food & Beverages" -> {
@@ -313,7 +322,6 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
         }
         return icon
     }
-
     override fun onClick(p0: View?) {
         var icon = 0
         var cat = ""
