@@ -38,7 +38,8 @@ enum class Drawables (@StringRes val resId: Int, val stored: Int) {
         PayInterest(R.drawable.payintererst, 30),
         CollectInterest(R.drawable.collectinterest, 31),
         Salary(R.drawable.salary, 32),
-        Income(R.drawable.income, 33);
+        Income(R.drawable.income, 33),
+        Category(R.drawable.category,34);
 
         companion object {
             @StringRes

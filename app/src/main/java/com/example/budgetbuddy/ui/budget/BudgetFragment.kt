@@ -82,7 +82,6 @@ class BudgetFragment : Fragment() {
             startActivity(intent)
         }
 
-
         @NonNull
         val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {

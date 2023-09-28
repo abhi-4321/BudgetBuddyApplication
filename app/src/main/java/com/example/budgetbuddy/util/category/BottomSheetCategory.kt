@@ -310,6 +310,7 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener,Category
 
     override fun onItemClick(category: String) {
         sharedTransactionViewModel.setCategory(category)
+        sharedTransactionViewModel.setIcon(34)
         dismiss()
     }
 

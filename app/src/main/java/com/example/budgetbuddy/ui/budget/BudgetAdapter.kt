@@ -56,10 +56,9 @@ class BudgetAdapter(
             holder.category.text = arrayList[position].category
 
             holder.edit.setOnClickListener {
-                val dialog = CustomDialogEdiBudget(arrayList[position].image,arrayList[position].category,context)
+                val dialog = CustomDialogEditBudget(arrayList[position].image,arrayList[position].category,context)
                 dialog.show()
             }
         }
-
 
 }

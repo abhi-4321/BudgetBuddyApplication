@@ -1,27 +1,38 @@
 package com.example.budgetbuddy.ui.budget
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.os.Bundle
+import android.provider.ContactsContract.Data
+import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.ActivityCreateBudgetBinding
 import com.example.budgetbuddy.repository.BudgetRepository
+import com.example.budgetbuddy.repository.CategoryRepository
+import com.example.budgetbuddy.util.category.Category
+import com.example.budgetbuddy.util.category.CategoryViewModel
+import com.example.budgetbuddy.util.category.CategoryViewModelFactory
 
 
-class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
+class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, CategoryAdapter2.ClickListener{
     private lateinit var binding: ActivityCreateBudgetBinding
     private lateinit var viewModel: SharedViewModel
+    private lateinit var categoryViewModel: CategoryViewModel
     private lateinit var dialog : CustomDialogSetBudget
     private lateinit var budgetViewModel: BudgetViewModel
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: Editor
     private val map = HashMap<String,String>()
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateBudgetBinding.inflate(layoutInflater)
@@ -30,8 +41,15 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
         val budgetDao = Database.getInstance(this).budgetDao()
         val budgetRepository = BudgetRepository(budgetDao)
 
+        val categoryDao = Database.getInstance(this).categoryDao()
+        val categoryRepository = CategoryRepository(categoryDao)
+
         viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         budgetViewModel = ViewModelProvider(this,BudgetViewModelFactory(budgetRepository))[BudgetViewModel::class.java]
+        categoryViewModel = ViewModelProvider(this,CategoryViewModelFactory(categoryRepository))[CategoryViewModel::class.java]
+
+        sharedPreferences = getSharedPreferences("Income", MODE_PRIVATE)
+        binding.amount.setText(sharedPreferences.getString("Amount",""))
 
         binding.done.setOnClickListener {
             insert()
@@ -41,6 +59,21 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
             finish()
         }
 
+        binding.recycler.layoutManager = LinearLayoutManager(this)
+        lateinit var adapter : CategoryAdapter2
+        var arrayList = ArrayList<Category>()
+
+        categoryViewModel.getCategories().observe(this){
+            arrayList = it as ArrayList<Category>
+            arrayList.add(
+                Category(R.drawable.profile,"NEW CATEGORY")
+            )
+            adapter = CategoryAdapter2(arrayList,this,this,this.lifecycle)
+            binding.recycler.adapter = adapter
+            adapter.notifyDataSetChanged()
+        }
+
+
         binding.close.setOnClickListener{
             onBackPressed()
         }
@@ -48,6 +81,8 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
         viewModel.getBudget().observe(this){
             val cat = it.first
             val amount = it.second
+
+            Toast.makeText(this,cat,Toast.LENGTH_SHORT).show()
 
             map[cat] = amount
             setView(cat,amount)
@@ -99,12 +134,13 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
         editor.putString("Amount",binding.amount.text.toString())
         editor.apply()
 
+        Log.d("Map",map.toString())
+
         for (budget in map)
         {
             val budgett = Budget(getIcon(budget.key),budget.key,budget.value.toInt(),0)
             budgetViewModel.insert(budgett)
         }
-        Toast.makeText(this,"hui",Toast.LENGTH_SHORT).show()
     }
     private fun setView(cat : String , amount : String) {
         when(cat) {
@@ -210,11 +246,13 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
             "Other Income" -> {
                 binding.income.text = amount
             }
-            else -> {}
+            else -> {
+
+            }
         }
     }
     private fun getIcon(cat : String) : Int{
-        var icon = -1
+        val icon: Int
         when(cat) {
             "Food & Beverages" -> {
                 icon = 0
@@ -318,7 +356,9 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
             "Other Income" -> {
                 icon = 33
             }
-            else -> {}
+            else -> {
+                icon = 34
+            }
         }
         return icon
     }
@@ -467,6 +507,11 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener{
 
         viewModel.setIcon(icon)
         viewModel.setCategory(cat)
+        dialog.show()
+    }
+
+    override fun onItemClick(category: String?) {
+        val dialog = CustomDialogSetBudget2(this,this,category!!)
         dialog.show()
     }
 }

@@ -25,7 +25,6 @@ class CustomDialogSetBudget(context: Context, private val activity : Activity) :
     private lateinit var binding : SetBudgetDilogBinding
     private lateinit var viewModel: SharedViewModel
 
-
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

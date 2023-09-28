@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -13,14 +14,13 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.EditBudgetDialogBinding
-import com.example.budgetbuddy.databinding.SetBudgetDilogBinding
 import com.example.budgetbuddy.repository.BudgetRepository
-import com.example.budgetbuddy.ui.transactions.Drawables
 import kotlinx.coroutines.*
 
-class CustomDialogEdiBudget (private val image : Int ,private val category : String, context : Context): Dialog(context),View.OnClickListener{
+class CustomDialogSetBudget2 (context : Context ,private val activity : Activity,private val category: String?): Dialog(context),View.OnClickListener{
 
     private lateinit var binding : EditBudgetDialogBinding
+    private lateinit var viewModel : SharedViewModel
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,15 +30,15 @@ class CustomDialogEdiBudget (private val image : Int ,private val category : Str
         binding = EditBudgetDialogBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel = ViewModelProvider(activity as ViewModelStoreOwner)[SharedViewModel::class.java]
+
         binding.setButton.setOnClickListener(this)
         binding.cancelButton.setOnClickListener(this)
 
-        binding.image.setImageResource(Drawables.asRes(image))
-
+        binding.image.setImageResource(R.drawable.category)
         binding.category.text = category
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.setButton -> {
@@ -48,12 +48,14 @@ class CustomDialogEdiBudget (private val image : Int ,private val category : Str
                 }
                 else
                 {
-                    val budgetDao = Database.getInstance(context).budgetDao()
-                    val budgetRepository = BudgetRepository(budgetDao)
+                    val sharedPreferences = context.getSharedPreferences("Amount",MODE_PRIVATE)
+                    sharedPreferences.getString(category,"")
+                    val editor = sharedPreferences.edit()
+                    editor.putString(category,binding.amount.text.toString())
+                    editor.apply()
 
-                    GlobalScope.launch(Dispatchers.IO) {
-                        budgetRepository.update(Budget(image,category,binding.amount.text.toString().toInt(),0))
-                    }
+                    viewModel.setAmount(binding.amount.text.toString())
+                    viewModel.addBudgets(binding.category.text.toString(),binding.amount.text.toString())
                     dismiss()
                 }
             }
