@@ -31,7 +31,9 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
     private lateinit var budgetViewModel: BudgetViewModel
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: Editor
+    private lateinit var arrayListNew : ArrayList<Budget>
     private val map = HashMap<String,String>()
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +75,9 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             adapter.notifyDataSetChanged()
         }
 
+        budgetViewModel.getBudgets().observe(this){
+            arrayListNew = it
+        }
 
         binding.close.setOnClickListener{
             onBackPressed()
@@ -83,7 +88,6 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             val amount = it.second
 
             Toast.makeText(this,cat,Toast.LENGTH_SHORT).show()
-
             map[cat] = amount
             setView(cat,amount)
         }
@@ -134,12 +138,18 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         editor.putString("Amount",binding.amount.text.toString())
         editor.apply()
 
-        Log.d("Map",map.toString())
-
+        Log.d("list",arrayListNew.toString())
         for (budget in map)
         {
+
             val budgett = Budget(getIcon(budget.key),budget.key,budget.value.toInt(),0)
-            budgetViewModel.insert(budgett)
+            if (arrayListNew.contains(budgett))
+            {
+                budgetViewModel.update(budgett)
+            }else{
+                budgetViewModel.insert(budgett)
+            }
+
         }
     }
     private fun setView(cat : String , amount : String) {

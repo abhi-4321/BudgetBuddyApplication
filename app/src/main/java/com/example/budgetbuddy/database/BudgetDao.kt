@@ -17,4 +17,5 @@ interface BudgetDao {
 
     @Update
     suspend fun update(budget: Budget)
+
 }

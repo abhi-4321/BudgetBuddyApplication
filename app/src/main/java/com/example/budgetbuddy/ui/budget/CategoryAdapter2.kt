@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,11 +72,13 @@ class CategoryAdapter2(
                     val amount = p0?.getString(arrayList[position].category,"")
                     if (!amount.isNullOrEmpty()) {
                         holder.setBudget.text = amount
+                        Log.d("toast",amount)
                     }
+                    Log.d("toast","msg")
                 }
             sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener)
 
-            holder.setBudget.setOnClickListener {
+            holder.linearLayout.setOnClickListener {
                 clickListener.onItemClick(arrayList[position].category)
             }
         }

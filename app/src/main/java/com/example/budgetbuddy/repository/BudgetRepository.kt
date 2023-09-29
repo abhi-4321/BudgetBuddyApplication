@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.budgetbuddy.database.BudgetDao
 import com.example.budgetbuddy.ui.budget.Budget
 
-class BudgetRepository(val budgetDao: BudgetDao) {
+class BudgetRepository(private val budgetDao: BudgetDao) {
 
     suspend fun insert(budget: Budget) {
         budgetDao.insert(budget)
