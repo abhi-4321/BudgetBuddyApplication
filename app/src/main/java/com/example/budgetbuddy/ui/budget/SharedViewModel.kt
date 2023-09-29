@@ -36,9 +36,4 @@ class SharedViewModel : ViewModel() {
     fun getCategory() : LiveData<String> {
         return _category
     }
-    private val _amount : MutableLiveData<String> = MutableLiveData()
-
-    fun setAmount(amount: String) {
-        _amount.value = amount
-    }
 }

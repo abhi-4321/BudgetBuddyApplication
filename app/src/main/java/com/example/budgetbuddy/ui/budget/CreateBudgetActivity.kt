@@ -70,7 +70,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             arrayList.add(
                 Category(R.drawable.profile,"NEW CATEGORY")
             )
-            adapter = CategoryAdapter2(arrayList,this,this,this.lifecycle)
+            adapter = CategoryAdapter2(arrayList,this,this,viewModel)
             binding.recycler.adapter = adapter
             adapter.notifyDataSetChanged()
         }
@@ -87,7 +87,6 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             val cat = it.first
             val amount = it.second
 
-            Toast.makeText(this,cat,Toast.LENGTH_SHORT).show()
             map[cat] = amount
             setView(cat,amount)
         }
@@ -138,10 +137,10 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         editor.putString("Amount",binding.amount.text.toString())
         editor.apply()
 
-        Log.d("list",arrayListNew.toString())
+        Log.d("Map",map.toString())
+
         for (budget in map)
         {
-
             val budgett = Budget(getIcon(budget.key),budget.key,budget.value.toInt(),0)
             if (arrayListNew.contains(budgett))
             {

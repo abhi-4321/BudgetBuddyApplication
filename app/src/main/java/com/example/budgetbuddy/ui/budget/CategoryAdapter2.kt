@@ -22,20 +22,8 @@ class CategoryAdapter2(
     private val arrayList: ArrayList<Category>,
     val context: Context,
     private val clickListener: ClickListener,
-    private val activityLifecycle: Lifecycle
+    private val viewModel : SharedViewModel
 ) : RecyclerView.Adapter<CategoryAdapter2.ViewHolder>(){
-
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("Amount", MODE_PRIVATE)
-
-    private val onDestroyObserver = LifecycleEventObserver { _, event ->
-        if (event == Lifecycle.Event.ON_DESTROY) {
-            sharedPreferences.edit().clear().apply()
-        }
-    }
-
-    init {
-        activityLifecycle.addObserver(onDestroyObserver)
-    }
 
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item){
         val image: ImageView = item.findViewById(R.id.image)
@@ -58,6 +46,13 @@ class CategoryAdapter2(
         holder.image.setImageResource(R.drawable.category)
         holder.text.text = arrayList[position].category
 
+        viewModel.getBudget().observe(holder.itemView.context as LifecycleOwner){
+            if (arrayList[position].category == it.first)
+            {
+                holder.setBudget.text = it.second
+            }
+        }
+
         if (position == arrayList.size - 1) {
             holder.image.setImageResource(R.drawable.profile)
             holder.linearLayout.visibility = View.GONE
@@ -67,17 +62,6 @@ class CategoryAdapter2(
             }
         }
         else {
-            val sharedPreferenceChangeListener =
-                SharedPreferences.OnSharedPreferenceChangeListener { p0, p1 ->
-                    val amount = p0?.getString(arrayList[position].category,"")
-                    if (!amount.isNullOrEmpty()) {
-                        holder.setBudget.text = amount
-                        Log.d("toast",amount)
-                    }
-                    Log.d("toast","msg")
-                }
-            sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener)
-
             holder.linearLayout.setOnClickListener {
                 clickListener.onItemClick(arrayList[position].category)
             }

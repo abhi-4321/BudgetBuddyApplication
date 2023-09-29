@@ -48,12 +48,6 @@ class CustomDialogSetBudget2 (context : Context ,private val activity : Activity
                 }
                 else
                 {
-                    val sharedPreferences = context.getSharedPreferences("Amount",MODE_PRIVATE)
-                    val editor = sharedPreferences.edit()
-                    editor.putString(category,binding.amount.text.toString())
-                    editor.apply()
-
-                    viewModel.setAmount(binding.amount.text.toString())
                     viewModel.addBudgets(binding.category.text.toString(),binding.amount.text.toString())
                     dismiss()
                 }

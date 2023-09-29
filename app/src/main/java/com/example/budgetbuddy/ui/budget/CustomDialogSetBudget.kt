@@ -56,7 +56,6 @@ class CustomDialogSetBudget(context: Context, private val activity : Activity) :
                 }
                 else
                 {
-                    viewModel.setAmount(binding.amount.text.toString())
                     viewModel.addBudgets(binding.category.text.toString(),binding.amount.text.toString())
                     dismiss()
                 }
