@@ -36,4 +36,13 @@ class SharedViewModel : ViewModel() {
     fun getCategory() : LiveData<String> {
         return _category
     }
+
+    private val _arrayList : MutableLiveData<ArrayList<Item>> = MutableLiveData<ArrayList<Item>>()
+    fun setArrayList(arrayList: ArrayList<Item>){
+        _arrayList.value = arrayList
+    }
+
+    fun getArrayList() : LiveData<ArrayList<Item>> {
+        return _arrayList
+    }
 }

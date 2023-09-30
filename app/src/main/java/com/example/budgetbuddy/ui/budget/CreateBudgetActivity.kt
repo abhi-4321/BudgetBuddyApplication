@@ -23,7 +23,7 @@ import com.example.budgetbuddy.util.category.CategoryViewModel
 import com.example.budgetbuddy.util.category.CategoryViewModelFactory
 
 
-class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, CategoryAdapter2.ClickListener{
+class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, CategoryAdapter2.ClickListener, CustomDialogSetBudget2.AddItem{
     private lateinit var binding: ActivityCreateBudgetBinding
     private lateinit var viewModel: SharedViewModel
     private lateinit var categoryViewModel: CategoryViewModel
@@ -33,6 +33,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
     private lateinit var editor: Editor
     private lateinit var arrayListNew : ArrayList<Budget>
     private val map = HashMap<String,String>()
+    val arrayLists = ArrayList<Item>()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +71,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             arrayList.add(
                 Category(R.drawable.profile,"NEW CATEGORY")
             )
-            adapter = CategoryAdapter2(arrayList,this,this,viewModel)
+            adapter = CategoryAdapter2(arrayList,this,this,categoryViewModel,this)
             binding.recycler.adapter = adapter
             adapter.notifyDataSetChanged()
         }
@@ -87,6 +88,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             val cat = it.first
             val amount = it.second
 
+            Toast.makeText(this,cat,Toast.LENGTH_SHORT).show()
             map[cat] = amount
             setView(cat,amount)
         }
@@ -137,10 +139,10 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         editor.putString("Amount",binding.amount.text.toString())
         editor.apply()
 
-        Log.d("Map",map.toString())
-
+        Log.d("list",arrayListNew.toString())
         for (budget in map)
         {
+
             val budgett = Budget(getIcon(budget.key),budget.key,budget.value.toInt(),0)
             if (arrayListNew.contains(budgett))
             {
@@ -520,7 +522,12 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
     }
 
     override fun onItemClick(category: String?) {
-        val dialog = CustomDialogSetBudget2(this,this,category!!)
+        val dialog = CustomDialogSetBudget2(this,this,category!!,this)
         dialog.show()
+    }
+
+    override fun onSet(category: String?, amount: String) {
+        arrayLists.add(Item(category!!,amount))
+        viewModel.setArrayList(arrayLists)
     }
 }
