@@ -45,4 +45,6 @@ class SharedViewModel : ViewModel() {
     fun getArrayList() : LiveData<ArrayList<Item>> {
         return _arrayList
     }
+
+
 }

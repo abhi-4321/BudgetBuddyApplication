@@ -5,8 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.os.Bundle
-import android.provider.ContactsContract.Data
-import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -22,7 +20,6 @@ import com.example.budgetbuddy.util.category.Category
 import com.example.budgetbuddy.util.category.CategoryViewModel
 import com.example.budgetbuddy.util.category.CategoryViewModelFactory
 
-
 class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, CategoryAdapter2.ClickListener, CustomDialogSetBudget2.AddItem{
     private lateinit var binding: ActivityCreateBudgetBinding
     private lateinit var viewModel: SharedViewModel
@@ -33,7 +30,8 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
     private lateinit var editor: Editor
     private lateinit var arrayListNew : ArrayList<Budget>
     private val map = HashMap<String,String>()
-    val arrayLists = ArrayList<Item>()
+    private val arrayLists = ArrayList<Item>()
+    private val list = ArrayList<Item>()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +48,8 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         budgetViewModel = ViewModelProvider(this,BudgetViewModelFactory(budgetRepository))[BudgetViewModel::class.java]
         categoryViewModel = ViewModelProvider(this,CategoryViewModelFactory(categoryRepository))[CategoryViewModel::class.java]
+
+        prePopulate()
 
         sharedPreferences = getSharedPreferences("Income", MODE_PRIVATE)
         binding.amount.setText(sharedPreferences.getString("Amount",""))
@@ -131,6 +131,14 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         binding.otherIncomeBills.setOnClickListener(this)
     }
 
+    private fun prePopulate() {
+        budgetViewModel.getBudgets().observe(this) {
+            for (item in it) {
+                setView(item.category, item.limit.toString())
+            }
+        }
+    }
+
     private fun insert() {
 
         sharedPreferences = getSharedPreferences("Income", MODE_PRIVATE)
@@ -142,7 +150,6 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         Log.d("list",arrayListNew.toString())
         for (budget in map)
         {
-
             val budgett = Budget(getIcon(budget.key),budget.key,budget.value.toInt(),0)
             if (arrayListNew.contains(budgett))
             {
@@ -258,9 +265,10 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
                 binding.income.text = amount
             }
             else -> {
-
+                list.add(Item(cat,amount))
             }
         }
+        viewModel.setArrayList(list)
     }
     private fun getIcon(cat : String) : Int{
         val icon: Int
