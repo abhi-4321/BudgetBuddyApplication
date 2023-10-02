@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.icu.util.CurrencyAmount
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -17,7 +18,7 @@ import com.example.budgetbuddy.databinding.EditBudgetDialogBinding
 import com.example.budgetbuddy.repository.BudgetRepository
 import kotlinx.coroutines.*
 
-class CustomDialogSetBudget2 (context : Context ,private val activity : Activity,private val category: String?): Dialog(context),View.OnClickListener{
+class CustomDialogSetBudget2 (context : Context ,private val activity : Activity,private val category: String?,private val addItem: AddItem): Dialog(context),View.OnClickListener{
 
     private lateinit var binding : EditBudgetDialogBinding
     private lateinit var viewModel : SharedViewModel
@@ -48,12 +49,7 @@ class CustomDialogSetBudget2 (context : Context ,private val activity : Activity
                 }
                 else
                 {
-                    val sharedPreferences = context.getSharedPreferences("Amount",MODE_PRIVATE)
-                    val editor = sharedPreferences.edit()
-                    editor.putString(category,binding.amount.text.toString())
-                    editor.apply()
-
-                    viewModel.setAmount(binding.amount.text.toString())
+                    addItem.onSet(category,binding.amount.text.toString())
                     viewModel.addBudgets(binding.category.text.toString(),binding.amount.text.toString())
                     dismiss()
                 }
@@ -63,5 +59,9 @@ class CustomDialogSetBudget2 (context : Context ,private val activity : Activity
         }
 
         dismiss()
+    }
+
+    interface AddItem{
+        fun onSet(category: String? , amount: String)
     }
 }

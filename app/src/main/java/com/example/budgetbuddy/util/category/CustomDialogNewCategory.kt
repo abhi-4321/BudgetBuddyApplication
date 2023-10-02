@@ -13,12 +13,13 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.repository.CategoryRepository
+import com.example.budgetbuddy.ui.budget.SharedViewModel
 import com.example.budgetbuddy.util.addTransaction.BottomSheetAddTransaction
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class CustomDialogNewCategory(context : Context) : Dialog(context), View.OnClickListener {
+class CustomDialogNewCategory(context : Context,private val viewModel : CategoryViewModel) : Dialog(context), View.OnClickListener {
 
     var add: MaterialButton? = null
     var cancel:MaterialButton? = null
@@ -49,12 +50,7 @@ class CustomDialogNewCategory(context : Context) : Dialog(context), View.OnClick
                 }
                 else
                 {
-                    GlobalScope.launch{
-                        categoryRepository.insert(Category(0,editText?.text.toString()))
-
-                    }
-
-                    Log.d("category", editText?.text.toString())
+                    viewModel.insert(Category(0,editText?.text.toString()))
                 }
 
 

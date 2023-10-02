@@ -56,7 +56,7 @@ class BudgetFragment : Fragment() {
         )[BudgetViewModel::class.java]
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

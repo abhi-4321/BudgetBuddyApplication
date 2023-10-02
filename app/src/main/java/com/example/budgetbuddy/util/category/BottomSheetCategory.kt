@@ -91,7 +91,7 @@ class BottomSheetCategory : BottomSheetDialogFragment(),OnClickListener,Category
             arrayList.add(
                 Category(R.drawable.profile,"NEW CATEGORY")
             )
-            myAdapter = CategoryAdapter(arrayList,requireContext(),this)
+            myAdapter = CategoryAdapter(arrayList,requireContext(),this,viewModel)
             binding.recycler.adapter = myAdapter
         })
 

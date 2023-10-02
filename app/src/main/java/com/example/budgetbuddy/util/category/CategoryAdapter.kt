@@ -14,7 +14,8 @@ import com.example.budgetbuddy.R
 class CategoryAdapter(
     private val arrayList: ArrayList<Category>,
     val context: Context,
-    val clickListener: ClickListener
+    val clickListener: ClickListener,
+    val viewModel : CategoryViewModel
 ) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(){
 
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item){
@@ -40,7 +41,7 @@ class CategoryAdapter(
         if (position == arrayList.size - 1) {
             holder.image.setImageResource(R.drawable.profile)
             holder.itemView.setOnClickListener {
-                val customDialogNewCategory = CustomDialogNewCategory(context)
+                val customDialogNewCategory = CustomDialogNewCategory(context,viewModel)
                 customDialogNewCategory.show()
             }
         } else {

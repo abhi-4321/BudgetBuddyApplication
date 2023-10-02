@@ -1,6 +1,7 @@
 package com.example.budgetbuddy.ui.budget
 
 import android.app.Activity
+import android.content.ClipData
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
@@ -16,26 +17,18 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.util.category.Category
+import com.example.budgetbuddy.util.category.CategoryViewModel
 import com.example.budgetbuddy.util.category.CustomDialogNewCategory
 
 class CategoryAdapter2(
     private val arrayList: ArrayList<Category>,
     val context: Context,
     private val clickListener: ClickListener,
-    private val activityLifecycle: Lifecycle
+    private val viewModel : CategoryViewModel,
+    private val activity: Activity
 ) : RecyclerView.Adapter<CategoryAdapter2.ViewHolder>(){
 
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("Amount", MODE_PRIVATE)
-
-    private val onDestroyObserver = LifecycleEventObserver { _, event ->
-        if (event == Lifecycle.Event.ON_DESTROY) {
-            sharedPreferences.edit().clear().apply()
-        }
-    }
-
-    init {
-        activityLifecycle.addObserver(onDestroyObserver)
-    }
+    private val viewModels = ViewModelProvider(activity as ViewModelStoreOwner)[SharedViewModel::class.java]
 
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item){
         val image: ImageView = item.findViewById(R.id.image)
@@ -45,9 +38,11 @@ class CategoryAdapter2(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.custom_category, parent, false)
         return ViewHolder(view)
+
     }
 
     override fun getItemCount(): Int {
@@ -58,26 +53,24 @@ class CategoryAdapter2(
         holder.image.setImageResource(R.drawable.category)
         holder.text.text = arrayList[position].category
 
+        viewModels.getArrayList().observe(activity as LifecycleOwner){
+
+            for (item in it){
+                if (item.category == arrayList[position].category){
+                    holder.setBudget.text = item.amount
+                }
+            }
+        }
+
         if (position == arrayList.size - 1) {
             holder.image.setImageResource(R.drawable.profile)
             holder.linearLayout.visibility = View.GONE
             holder.itemView.setOnClickListener {
-                val customDialogNewCategory = CustomDialogNewCategory(context)
+                val customDialogNewCategory = CustomDialogNewCategory(context,viewModel)
                 customDialogNewCategory.show()
             }
         }
         else {
-            val sharedPreferenceChangeListener =
-                SharedPreferences.OnSharedPreferenceChangeListener { p0, p1 ->
-                    val amount = p0?.getString(arrayList[position].category,"")
-                    if (!amount.isNullOrEmpty()) {
-                        holder.setBudget.text = amount
-                        Log.d("toast",amount)
-                    }
-                    Log.d("toast","msg")
-                }
-            sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener)
-
             holder.linearLayout.setOnClickListener {
                 clickListener.onItemClick(arrayList[position].category)
             }
