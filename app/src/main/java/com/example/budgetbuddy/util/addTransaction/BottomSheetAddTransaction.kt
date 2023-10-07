@@ -3,52 +3,72 @@ package com.example.budgetbuddy.util.addTransaction
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.DrawableWrapper
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.AddTransactionBottomSheetBinding
+import com.example.budgetbuddy.repository.BudgetRepository
+import com.example.budgetbuddy.repository.IncomeSpentRepo
 import com.example.budgetbuddy.repository.TransactionRepository
+import com.example.budgetbuddy.ui.budget.Budget
+import com.example.budgetbuddy.ui.budget.BudgetViewModel
+import com.example.budgetbuddy.ui.budget.BudgetViewModelFactory
+import com.example.budgetbuddy.ui.budget.IncomeSpent
 import com.example.budgetbuddy.ui.transactions.Drawables
 import com.example.budgetbuddy.util.category.BottomSheetCategory
 import com.example.budgetbuddy.util.date.DatePicker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.*
 import java.lang.Integer.parseInt
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.OnDateSetListener,CompoundButton.OnCheckedChangeListener {
+class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.OnDateSetListener,
+    CompoundButton.OnCheckedChangeListener {
+    private var array: ArrayList<IncomeSpent> = ArrayList()
     lateinit var behavior: BottomSheetBehavior<FrameLayout>
     lateinit var binding: AddTransactionBottomSheetBinding
     private lateinit var viewModel: SharedTransactionViewModel
     lateinit var addTransactionViewModel: AddTransactionViewModel
-    private var selectedModeTextView : TextView? = null
-    private var selectedTextView : TextView? = null
-    private var it : Int = 0
-    private fun getWindowHeight() = resources.displayMetrics.heightPixels
+    private var selectedModeTextView: TextView? = null
+    private var selectedTextView: TextView? = null
+    private var it: Int = 0
+    private lateinit var budgetViewModel: BudgetViewModel
+    private var arrayList = ArrayList<String>()
+    private lateinit var incomeSpentRepo : IncomeSpentRepo
+    var int = 0
 
+    private fun getWindowHeight() = resources.displayMetrics.heightPixels
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[SharedTransactionViewModel::class.java]
 
         val transactionDao = Database.getInstance(requireContext()).transactionDao()
         val transactionRepository = TransactionRepository(transactionDao)
+
+        val incomeSpentDao = Database.getInstance(requireContext()).incomeSpentDao()
+        incomeSpentRepo = IncomeSpentRepo(incomeSpentDao)
+
+        val budgetDao = Database.getInstance(requireContext()).budgetDao()
+        val budgetRepository = BudgetRepository(budgetDao)
+
+        budgetViewModel = ViewModelProvider(
+            this,
+            BudgetViewModelFactory(budgetRepository)
+        )[BudgetViewModel::class.java]
 
         addTransactionViewModel = ViewModelProvider(
             requireActivity(),
@@ -67,14 +87,15 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
             dismiss()
         }
 
-        binding.date.text = SimpleDateFormat("dd MMMM yyyy").format(System.currentTimeMillis()).toString()
+        binding.date.text =
+            SimpleDateFormat("dd MMMM yyyy").format(System.currentTimeMillis()).toString()
 
         viewModel.getCategory().observe(requireActivity(), Observer {
             binding.category.setText(it)
         })
         viewModel.getIcon().observe(requireActivity(), Observer {
-            this.it=it
-            val icon : Int? = Drawables.asRes(it)
+            this.it = it
+            val icon: Int? = Drawables.asRes(it)
             binding.icon.setImageResource(icon!!)
         })
 
@@ -153,12 +174,20 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
             timePicker.show()
         }
 
+        incomeSpentRepo.gets().observe(this){
+            array = it
+        }
+
         binding.cashRdo.setOnCheckedChangeListener(this)
         binding.onlineRdo.setOnCheckedChangeListener(this)
         binding.creditRdo.setOnCheckedChangeListener(this)
         binding.debitRdo.setOnCheckedChangeListener(this)
 
-
+        budgetViewModel.getBudgets().observe(this) {
+            for (item in it) {
+                arrayList.add(item.category)
+            }
+        }
 
         binding.date.setOnClickListener {
             val datePicker = DatePicker()
@@ -172,29 +201,89 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
         return binding.root
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun done() {
+        val category = binding.category.text.toString()
 
-        if (selectedTextView == null || selectedModeTextView == null)
-        {
-            Toast.makeText(context,"Please Select All Options",Toast.LENGTH_SHORT).show()
+        if (selectedTextView == null || selectedModeTextView == null) {
+            Toast.makeText(context, "Please Select All Options", Toast.LENGTH_SHORT).show()
             return
         }
 
-        addTransactionViewModel.insert(
-            Transaction(
-                0,
-                it,
-                binding.amount.text.toString(),
-                binding.remark.text.toString(),
-                binding.text.text.toString(),
-                selectedModeTextView?.text.toString(),
-                binding.category.text.toString(),
-                selectedTextView?.text.toString(),
-                binding.date.text.toString(),
-                binding.time.text.toString()
+        val trimDate = (binding.date.text.toString()).substring(3)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            // Insert the transaction
+            addTransactionViewModel.insert(
+                Transaction(
+                    0,
+                    it,
+                    binding.amount.text.toString(),
+                    binding.remark.text.toString(),
+                    binding.text.text.toString(),
+                    selectedModeTextView?.text.toString(),
+                    category,
+                    selectedTextView?.text.toString(),
+                    binding.date.text.toString(),
+                    trimDate,
+                    binding.time.text.toString()
+                )
             )
-        )
+
+            // Now that the insert is done, calculate total spent for the current month
+            val currentMonth =
+                SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(System.currentTimeMillis())
+                    .toString()
+            val totalSpent = addTransactionViewModel.totalSpent(currentMonth).await()
+
+            // Check array and update spent accordingly
+            if (array.isEmpty()) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    incomeSpentRepo.insertSpent(totalSpent)
+                }
+            } else {
+                GlobalScope.launch(Dispatchers.IO) {
+                    incomeSpentRepo.updateSpent(totalSpent)
+                }
+            }
+        }
+
+        if (arrayList.contains(category)) {
+
+            val currentMonth = SimpleDateFormat(
+                "MMMM yyyy",
+                Locale.getDefault()
+            ).format(System.currentTimeMillis()).toString()
+
+            addTransactionViewModel.getMonthlyTransactions(currentMonth).observe(this) {
+                for(item in it){
+                    when(item.category){
+                        category -> {
+                            budgetViewModel.updateSpent(item.total.toInt(), category)
+                        }
+                    }
+                }
+            }
+        }
         dismiss()
+    }
+
+    // Define an extension function to await LiveData value
+    @OptIn(ExperimentalCoroutinesApi::class)
+    suspend fun <T> LiveData<T>.await(): T = withContext(Dispatchers.Main) {
+        suspendCancellableCoroutine { cont ->
+            val observer = object : Observer<T> {
+                override fun onChanged(value: T) {
+                    cont.resume(value) {}
+                removeObserver(this)
+            // Remove the observer when it's no longer needed
+                }
+            }
+            observeForever(observer)
+            cont.invokeOnCancellation {
+                removeObserver(observer) // Remove the observer in case of cancellation
+            }
+        }
     }
 
     override fun onStart() {
@@ -259,25 +348,26 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
         }
         startActivityForResult(intent, 100)
     }
+
     override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
 
-        if (p1){
+        if (p1) {
             when (p0?.id) {
                 R.id.cashRdo -> {
                     binding.onlineRdo.isChecked = false
-                    selectedModeTextView=binding.cash
+                    selectedModeTextView = binding.cash
                 }
                 R.id.onlineRdo -> {
                     binding.cashRdo.isChecked = false
-                    selectedModeTextView=binding.online
+                    selectedModeTextView = binding.online
                 }
                 R.id.debitRdo -> {
                     binding.creditRdo.isChecked = false
-                    selectedTextView=binding.debit
+                    selectedTextView = binding.debit
                 }
                 R.id.creditRdo -> {
                     binding.debitRdo.isChecked = false
-                    selectedTextView=binding.credit
+                    selectedTextView = binding.credit
                 }
             }
         }

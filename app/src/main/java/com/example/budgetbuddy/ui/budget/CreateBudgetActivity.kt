@@ -5,9 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,23 +14,39 @@ import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.ActivityCreateBudgetBinding
 import com.example.budgetbuddy.repository.BudgetRepository
 import com.example.budgetbuddy.repository.CategoryRepository
+import com.example.budgetbuddy.repository.IncomeSpentRepo
+import com.example.budgetbuddy.repository.TransactionRepository
+import com.example.budgetbuddy.util.addTransaction.AddTransactionViewModel
+import com.example.budgetbuddy.util.addTransaction.AddTransactionViewModelFactory
 import com.example.budgetbuddy.util.category.Category
 import com.example.budgetbuddy.util.category.CategoryViewModel
 import com.example.budgetbuddy.util.category.CategoryViewModelFactory
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
-class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, CategoryAdapter2.ClickListener, CustomDialogSetBudget2.AddItem{
+class CreateBudgetActivity : AppCompatActivity(), View.OnClickListener,
+    CategoryAdapter2.ClickListener, CustomDialogSetBudget2.AddItem {
     private lateinit var binding: ActivityCreateBudgetBinding
     private lateinit var viewModel: SharedViewModel
     private lateinit var categoryViewModel: CategoryViewModel
-    private lateinit var dialog : CustomDialogSetBudget
+    private lateinit var dialog: CustomDialogSetBudget
     private lateinit var budgetViewModel: BudgetViewModel
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: Editor
-    private lateinit var arrayListNew : ArrayList<Budget>
-    private val map = HashMap<String,String>()
+    private lateinit var arrayListNew: ArrayList<Budget>
+    private val map = HashMap<String, String>()
     private val arrayLists = ArrayList<Item>()
     private val list = ArrayList<Item>()
+    private lateinit var addTransactionViewModel: AddTransactionViewModel
+    private val hashMap = HashMap<String, String>()
+    private var arrayList = ArrayList<IncomeSpent>()
+    private lateinit var incomeSpentRepo : IncomeSpentRepo
 
+    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,61 +59,96 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         val categoryDao = Database.getInstance(this).categoryDao()
         val categoryRepository = CategoryRepository(categoryDao)
 
+        val addTransactionDao = Database.getInstance(this).transactionDao()
+        val transactionRepository = TransactionRepository(addTransactionDao)
+
+        val incomeSpentDao = Database.getInstance(this).incomeSpentDao()
+        incomeSpentRepo = IncomeSpentRepo(incomeSpentDao)
+
         viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
-        budgetViewModel = ViewModelProvider(this,BudgetViewModelFactory(budgetRepository))[BudgetViewModel::class.java]
-        categoryViewModel = ViewModelProvider(this,CategoryViewModelFactory(categoryRepository))[CategoryViewModel::class.java]
+        budgetViewModel = ViewModelProvider(
+            this,
+            BudgetViewModelFactory(budgetRepository)
+        )[BudgetViewModel::class.java]
+        categoryViewModel = ViewModelProvider(
+            this,
+            CategoryViewModelFactory(categoryRepository)
+        )[CategoryViewModel::class.java]
+
+        addTransactionViewModel = ViewModelProvider(
+            this,
+            AddTransactionViewModelFactory(transactionRepository)
+        )[AddTransactionViewModel::class.java]
 
         prePopulate()
 
-        sharedPreferences = getSharedPreferences("Income", MODE_PRIVATE)
-        binding.amount.setText(sharedPreferences.getString("Amount",""))
+        incomeSpentRepo.gets().observe(this){
+                arrayList = it
+            if (it.isNotEmpty()){
+                binding.amount.setText((it[0].income).toString())
+            }
+            else{
+                binding.amount.setText("0")
+            }
+        }
 
         binding.done.setOnClickListener {
-            insert()
-            val resultIntent = Intent()
-            resultIntent.putExtra("keyName", binding.amount.text.toString())
-            setResult(RESULT_OK, resultIntent)
-            finish()
+            if (binding.amount.text.isNullOrEmpty()){
+                binding.amount.error = "Enter a valid Amount"
+            }else {
+                insert()
+                finish()
+            }
+
         }
 
         binding.recycler.layoutManager = LinearLayoutManager(this)
-        lateinit var adapter : CategoryAdapter2
+        lateinit var adapter: CategoryAdapter2
         var arrayList = ArrayList<Category>()
 
-        categoryViewModel.getCategories().observe(this){
+        categoryViewModel.getCategories().observe(this) {
             arrayList = it as ArrayList<Category>
             arrayList.add(
-                Category(R.drawable.profile,"NEW CATEGORY")
+                Category(R.drawable.profile, "NEW CATEGORY")
             )
-            adapter = CategoryAdapter2(arrayList,this,this,categoryViewModel,this)
+            adapter = CategoryAdapter2(arrayList, this, this, categoryViewModel, this)
             binding.recycler.adapter = adapter
             adapter.notifyDataSetChanged()
         }
+        val currentMonth =
+            SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(System.currentTimeMillis())
+                .toString()
 
-        budgetViewModel.getBudgets().observe(this){
+        addTransactionViewModel.getMonthlyTransactions(currentMonth).observe(this) {
+
+            for (transaction in it) {
+                hashMap[transaction.category] = transaction.total
+            }
+        }
+
+        budgetViewModel.getBudgets().observe(this) {
             arrayListNew = it
         }
 
-        binding.close.setOnClickListener{
+        binding.close.setOnClickListener {
             onBackPressed()
         }
 
-        viewModel.getBudget().observe(this){
+        viewModel.getBudget().observe(this) {
             val cat = it.first
             val amount = it.second
 
-            Toast.makeText(this,cat,Toast.LENGTH_SHORT).show()
             map[cat] = amount
-            setView(cat,amount)
+            setView(cat, amount)
         }
 
-        dialog = CustomDialogSetBudget(this,this)
+        dialog = CustomDialogSetBudget(this, this)
 
         binding.foodBtn.setOnClickListener(this)
         binding.transportationBills.setOnClickListener(this)
-        binding.rentals.setOnClickListener (this)
+        binding.rentals.setOnClickListener(this)
         binding.waterBills.setOnClickListener(this)
-        binding.phoneBills.setOnClickListener (this)
+        binding.phoneBills.setOnClickListener(this)
         binding.electricitybill.setOnClickListener(this)
         binding.gasBill.setOnClickListener(this)
         binding.telivisionBill.setOnClickListener(this)
@@ -109,18 +158,18 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         binding.vehicleMaintainenceBill.setOnClickListener(this)
         binding.medialCheckupBill.setOnClickListener(this)
         binding.insuranceBill.setOnClickListener(this)
-        binding.educationBills.setOnClickListener (this)
+        binding.educationBills.setOnClickListener(this)
         binding.houseWareBill.setOnClickListener(this)
-        binding.personalItemsbills.setOnClickListener (this)
+        binding.personalItemsbills.setOnClickListener(this)
         binding.petsBills.setOnClickListener(this)
         binding.homeServiceBills.setOnClickListener(this)
-        binding.otherExpenseBills.setOnClickListener (this)
+        binding.otherExpenseBills.setOnClickListener(this)
         binding.fitnessBills.setOnClickListener(this)
         binding.makeupBills.setOnClickListener(this)
         binding.giftAndDonationBills.setOnClickListener(this)
         binding.stremingServicesBills.setOnClickListener(this)
         binding.funZoneBills.setOnClickListener(this)
-        binding.investmentBills.setOnClickListener (this)
+        binding.investmentBills.setOnClickListener(this)
         binding.debtCollectBills.setOnClickListener(this)
         binding.debtBills.setOnClickListener(this)
         binding.loanbills.setOnClickListener(this)
@@ -132,6 +181,8 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
     }
 
     private fun prePopulate() {
+
+
         budgetViewModel.getBudgets().observe(this) {
             for (item in it) {
                 setView(item.category, item.limit.toString())
@@ -139,29 +190,51 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun insert() {
 
-        sharedPreferences = getSharedPreferences("Income", MODE_PRIVATE)
-        sharedPreferences.getString("Amount","")
-        editor = sharedPreferences.edit()
-        editor.putString("Amount",binding.amount.text.toString())
-        editor.apply()
-
-        Log.d("list",arrayListNew.toString())
-        for (budget in map)
+        if(arrayList.isEmpty())
         {
-            val budgett = Budget(getIcon(budget.key),budget.key,budget.value.toInt(),0)
-            if (arrayListNew.contains(budgett))
-            {
+            GlobalScope.launch(Dispatchers.IO) {
+                incomeSpentRepo.insertIncome(binding.amount.text.toString().toInt())
+            }
+        }
+        else{
+            GlobalScope.launch(Dispatchers.IO) {
+                incomeSpentRepo.updateIncome(binding.amount.text.toString().toInt())
+            }
+        }
+
+
+        for (budget in map) {
+
+
+            val budgett = if (hashMap.containsKey(budget.key)) {
+                Budget(
+                    getIcon(budget.key),
+                    budget.key,
+                    budget.value.toInt(),
+                    hashMap[budget.key]!!.toInt()
+                )
+            } else {
+                Budget(getIcon(budget.key), budget.key, budget.value.toInt(), 0)
+            }
+
+
+            if (arrayListNew.contains(budgett)) {
                 budgetViewModel.update(budgett)
-            }else{
+            } else {
                 budgetViewModel.insert(budgett)
             }
 
         }
+
+
     }
-    private fun setView(cat : String , amount : String) {
-        when(cat) {
+
+    private fun setView(cat: String, _amount: String) {
+        val amount = "₹$_amount"
+        when (cat) {
             "Food & Beverages" -> {
                 binding.food.text = amount
             }
@@ -228,7 +301,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             "Makeup" -> {
                 binding.makeup.text = amount
             }
-            "Gifts & Donations"-> {
+            "Gifts & Donations" -> {
                 binding.gifts.text = amount
             }
             "Streaming Services" -> {
@@ -240,7 +313,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             "Investment" -> {
                 binding.investment.text = amount
             }
-            "Debt Collection"-> {
+            "Debt Collection" -> {
                 binding.debtCollect.text = amount
             }
             "Debt" -> {
@@ -265,14 +338,15 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
                 binding.income.text = amount
             }
             else -> {
-                list.add(Item(cat,amount))
+                list.add(Item(cat, amount))
             }
         }
         viewModel.setArrayList(list)
     }
-    private fun getIcon(cat : String) : Int{
+
+    private fun getIcon(cat: String): Int {
         val icon: Int
-        when(cat) {
+        when (cat) {
             "Food & Beverages" -> {
                 icon = 0
             }
@@ -339,7 +413,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             "Makeup" -> {
                 icon = 21
             }
-            "Gifts & Donations"-> {
+            "Gifts & Donations" -> {
                 icon = 22
             }
             "Streaming Services" -> {
@@ -351,7 +425,7 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
             "Investment" -> {
                 icon = 25
             }
-            "Debt Collection"-> {
+            "Debt Collection" -> {
                 icon = 26
             }
             "Debt" -> {
@@ -381,11 +455,12 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
         }
         return icon
     }
+
     override fun onClick(p0: View?) {
         var icon = 0
         var cat = ""
 
-        when(p0?.id) {
+        when (p0?.id) {
             R.id.foodBtn -> {
                 icon = 0
                 cat = "Food & Beverages"
@@ -530,12 +605,12 @@ class CreateBudgetActivity : AppCompatActivity() , View.OnClickListener, Categor
     }
 
     override fun onItemClick(category: String?) {
-        val dialog = CustomDialogSetBudget2(this,this,category!!,this)
+        val dialog = CustomDialogSetBudget2(this, this, category!!, this)
         dialog.show()
     }
 
     override fun onSet(category: String?, amount: String) {
-        arrayLists.add(Item(category!!,amount))
+        arrayLists.add(Item(category!!, amount))
         viewModel.setArrayList(arrayLists)
     }
 }

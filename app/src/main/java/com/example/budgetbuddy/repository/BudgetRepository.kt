@@ -22,4 +22,11 @@ class BudgetRepository(private val budgetDao: BudgetDao) {
         return budgetDao.getBudgets() as LiveData<ArrayList<Budget>>
     }
 
+    suspend fun updateSpent(spent : Int , category : String){
+        budgetDao.updateSpent(spent,category)
+    }
+
+    suspend fun updateLimit(limit : Int, category: String){
+        budgetDao.updateLimit(limit,category)
+    }
 }

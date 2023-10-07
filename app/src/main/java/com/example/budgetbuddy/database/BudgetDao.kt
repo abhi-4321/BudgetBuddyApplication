@@ -18,4 +18,13 @@ interface BudgetDao {
     @Update
     suspend fun update(budget: Budget)
 
+    @Query("UPDATE budget " +
+            "SET spent = :spent " +
+            "WHERE category = :category ")
+    suspend fun updateSpent(spent : Int , category : String)
+
+    @Query("UPDATE budget " +
+            "SET 'limit' = :limit " +
+            "WHERE category = :category")
+    suspend fun updateLimit(limit : Int, category : String)
 }

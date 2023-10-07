@@ -20,7 +20,6 @@ data class Budget(
 
         if (image != other.image) return false
         if (category != other.category) return false
-        if (spent != other.spent) return false
 
         return true
     }

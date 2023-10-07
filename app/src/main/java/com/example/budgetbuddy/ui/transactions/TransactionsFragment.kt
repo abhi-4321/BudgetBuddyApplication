@@ -58,11 +58,9 @@ class TransactionsFragment : Fragment() {
 
     private fun initList() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            Handler.createAsync(Looper.getMainLooper()).postDelayed(Runnable {
+
                 binding.swipeRefreshLayout.isRefreshing = false
                 reload()
-            },1500)
-
         }
         layoutManager = LinearLayoutManager(requireContext())
         adapter = TransactionAdapter{
@@ -84,7 +82,7 @@ class TransactionsFragment : Fragment() {
 //            Log.d("list", list.toString())
 //        }
         lateinit var arraylist : ArrayList<Transaction>
-        list.observe(requireActivity(), Observer {
+        list.observe(viewLifecycleOwner, Observer {
             arraylist = it as ArrayList<Transaction>
             binding.recyclerView.post {
                 adapter.reload(arraylist)
@@ -96,14 +94,14 @@ class TransactionsFragment : Fragment() {
 
     private fun loadMore() {
 
-        val list = dummyData(adapter.itemCount)
-        lateinit var arraylist : ArrayList<Transaction>
-        list.observe(requireActivity(), Observer {
-            arraylist=it as ArrayList<Transaction>
-            binding.recyclerView.post {
-                adapter.loadMore(arraylist)
-            }
-        })
+//        val list = dummyData(adapter.itemCount)
+//        lateinit var arraylist : ArrayList<Transaction>
+//        list.observe(requireActivity(), Observer {
+//            arraylist=it as ArrayList<Transaction>
+//            binding.recyclerView.post {
+//                adapter.loadMore(arraylist)
+//            }
+//        })
 //        binding.recyclerView.post {
 //            adapter.loadMore(list)
 //        }
@@ -116,20 +114,19 @@ class TransactionsFragment : Fragment() {
                 in 0..15 -> {
                     Toast.makeText(context,"1 2 15",Toast.LENGTH_SHORT).show()
                     return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
-
                 }
-                in 16..30 -> {
-                    Toast.makeText(context,"16 2 30",Toast.LENGTH_SHORT).show()
-                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
-                }
-                in 31..45 -> {
-                    Toast.makeText(context,"31 2 45",Toast.LENGTH_SHORT).show()
-                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
-                }
-                else -> {
-                    Toast.makeText(context,"46 2 60",Toast.LENGTH_SHORT).show()
-                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
-                }
+//                in 16..30 -> {
+//                    Toast.makeText(context,"16 2 30",Toast.LENGTH_SHORT).show()
+//                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
+//                }
+//                in 31..45 -> {
+//                    Toast.makeText(context,"31 2 45",Toast.LENGTH_SHORT).show()
+//                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
+//                }
+//                else -> {
+//                    Toast.makeText(context,"46 2 60",Toast.LENGTH_SHORT).show()
+//                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
+//                }
             }
         }
         return list

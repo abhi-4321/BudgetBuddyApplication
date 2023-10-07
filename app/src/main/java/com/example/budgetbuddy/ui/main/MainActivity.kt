@@ -1,6 +1,5 @@
 package com.example.budgetbuddy.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

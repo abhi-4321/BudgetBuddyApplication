@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
+import android.widget.Toast
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.EditBudgetDialogBinding
@@ -47,7 +49,8 @@ class CustomDialogEditBudget (private val image : Int, private val category : St
                     val budgetRepository = BudgetRepository(budgetDao)
 
                     GlobalScope.launch(Dispatchers.IO) {
-                        budgetRepository.update(Budget(image,category,binding.amount.text.toString().toInt(),0))
+                        budgetRepository.updateLimit(binding.amount.text.toString().toInt(),category)
+                        Log.d("TAG","hui")
                     }
                     dismiss()
                 }

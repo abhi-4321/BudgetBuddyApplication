@@ -15,6 +15,7 @@ data class Transaction(
     val category: String,
     val debit: String,
     val date: String,
+    val month: String,
     val time: String
 )
 
