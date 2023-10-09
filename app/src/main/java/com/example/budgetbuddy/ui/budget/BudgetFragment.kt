@@ -81,7 +81,11 @@ class BudgetFragment : Fragment() {
             val saved = (income-spent)
             binding.saved.text = "₹$saved"
 
-            val per = ((saved.toFloat())/(income.toFloat()))*100f
+            val per = if(income ==0){
+                0f
+            } else {
+                ((saved.toFloat())/(income.toFloat()))*100f
+            }
 
             binding.progress.text = "$per%"
             //circular progress bar

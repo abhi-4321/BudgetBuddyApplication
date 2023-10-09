@@ -85,7 +85,10 @@ class CreateBudgetActivity : AppCompatActivity(), View.OnClickListener,
         incomeSpentRepo.gets().observe(this){
                 arrayList = it
             if (it.isNotEmpty()){
-                binding.amount.setText((it[0].income).toString())
+                if(it[0].income == null)
+                    binding.amount.setText("0")
+                 else
+                    binding.amount.setText((it[0].income).toString())
             }
             else{
                 binding.amount.setText("0")

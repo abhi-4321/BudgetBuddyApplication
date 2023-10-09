@@ -4,13 +4,17 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +40,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.OnDateSetListener,
+class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissListener?) : BottomSheetDialogFragment(), DatePickerDialog.OnDateSetListener,
     CompoundButton.OnCheckedChangeListener {
     private var array: ArrayList<IncomeSpent> = ArrayList()
     lateinit var behavior: BottomSheetBehavior<FrameLayout>
@@ -47,6 +51,7 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
     private var selectedTextView: TextView? = null
     private var it: Int = 0
     private lateinit var budgetViewModel: BudgetViewModel
+    private lateinit var budgetRepository : BudgetRepository
     private var arrayList = ArrayList<String>()
     private lateinit var incomeSpentRepo : IncomeSpentRepo
     var int = 0
@@ -63,7 +68,7 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
         incomeSpentRepo = IncomeSpentRepo(incomeSpentDao)
 
         val budgetDao = Database.getInstance(requireContext()).budgetDao()
-        val budgetRepository = BudgetRepository(budgetDao)
+        budgetRepository = BudgetRepository(budgetDao)
 
         budgetViewModel = ViewModelProvider(
             this,
@@ -212,9 +217,15 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
 
         val trimDate = (binding.date.text.toString()).substring(3)
 
+        val currentMonth =
+            SimpleDateFormat(
+                "MMMM yyyy",
+                Locale.getDefault()
+            ).format(System.currentTimeMillis())
+                .toString()
         GlobalScope.launch(Dispatchers.IO) {
             // Insert the transaction
-            addTransactionViewModel.insert(
+            val insertion = addTransactionViewModel.insert(
                 Transaction(
                     0,
                     it,
@@ -230,45 +241,39 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
                 )
             )
 
-            // Now that the insert is done, calculate total spent for the current month
-            val currentMonth =
-                SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(System.currentTimeMillis())
-                    .toString()
+            waitForCondition(insertion.toString() == "kotlin.Unit")
+
             val totalSpent = addTransactionViewModel.totalSpent(currentMonth).await()
+            Log.d("Insert",totalSpent.toString())
 
-            // Check array and update spent accordingly
             if (array.isEmpty()) {
-                GlobalScope.launch(Dispatchers.IO) {
-                    incomeSpentRepo.insertSpent(totalSpent)
-                }
+                incomeSpentRepo.insertSpent(totalSpent)
             } else {
-                GlobalScope.launch(Dispatchers.IO) {
-                    incomeSpentRepo.updateSpent(totalSpent)
-                }
+                incomeSpentRepo.updateSpent(totalSpent)
             }
-        }
 
-        if (arrayList.contains(category)) {
+            if (arrayList.contains(category)) {
+                val monthlyTransactions =
+                    addTransactionViewModel.getMonthlyTransactions(currentMonth).await()
 
-            val currentMonth = SimpleDateFormat(
-                "MMMM yyyy",
-                Locale.getDefault()
-            ).format(System.currentTimeMillis()).toString()
-
-            addTransactionViewModel.getMonthlyTransactions(currentMonth).observe(this) {
-                for(item in it){
-                    when(item.category){
-                        category -> {
-                            budgetViewModel.updateSpent(item.total.toInt(), category)
-                        }
+                for (item in monthlyTransactions) {
+                    if (item.category == category) {
+                        Log.d("BudgetViewModel", "Updating spent for category: $category, total: ${item.total.toInt()}")
+                        budgetRepository.updateSpent(item.total.toInt(), category)
                     }
                 }
             }
         }
+
+
         dismiss()
     }
+    private suspend fun waitForCondition(condition : Boolean) {
+        while (!condition) {
+            yield()
+        }
+    }
 
-    // Define an extension function to await LiveData value
     @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun <T> LiveData<T>.await(): T = withContext(Dispatchers.Main) {
         suspendCancellableCoroutine { cont ->
@@ -276,12 +281,11 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
                 override fun onChanged(value: T) {
                     cont.resume(value) {}
                 removeObserver(this)
-            // Remove the observer when it's no longer needed
                 }
             }
             observeForever(observer)
             cont.invokeOnCancellation {
-                removeObserver(observer) // Remove the observer in case of cancellation
+                removeObserver(observer)
             }
         }
     }
@@ -328,7 +332,6 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 100) {
-                Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show()
                 val selectedImageURI = data?.data
                 context?.contentResolver?.takePersistableUriPermission(
                     selectedImageURI!!,
@@ -371,6 +374,14 @@ class BottomSheetAddTransaction : BottomSheetDialogFragment(), DatePickerDialog.
                 }
             }
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        dismissListener?.onBottomSheetDismiss()
+    }
+    interface BottomSheetDismissListener{
+        fun onBottomSheetDismiss()
     }
 }
 

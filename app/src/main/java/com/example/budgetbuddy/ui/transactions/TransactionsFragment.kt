@@ -2,15 +2,12 @@ package com.example.budgetbuddy.ui.transactions
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.database.Database
@@ -19,6 +16,9 @@ import com.example.budgetbuddy.repository.TransactionRepository
 import com.example.budgetbuddy.util.addTransaction.AddTransactionViewModel
 import com.example.budgetbuddy.util.addTransaction.AddTransactionViewModelFactory
 import com.example.budgetbuddy.util.addTransaction.Transaction
+import kotlinx.coroutines.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TransactionsFragment : Fragment() {
 
@@ -28,17 +28,18 @@ class TransactionsFragment : Fragment() {
 
     private lateinit var viewModel: AddTransactionViewModel
     private var _binding: FragmentTransactionsBinding? = null
-    private val binding get() = _binding ?: throw IllegalStateException("Fragment view is not available yet")
-    private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var adapter: TransactionAdapter
-    private lateinit var itemSectionDecoration: TransactionSectionDecoration
+    private val binding
+        get() = _binding ?: throw IllegalStateException("Fragment view is not available yet")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val transactionDao = Database.getInstance(requireContext()).transactionDao()
         val transactionRepository = TransactionRepository(transactionDao)
-        viewModel = ViewModelProvider(requireActivity(),AddTransactionViewModelFactory(transactionRepository))[AddTransactionViewModel::class.java]
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            AddTransactionViewModelFactory(transactionRepository)
+        )[AddTransactionViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -46,6 +47,8 @@ class TransactionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTransactionsBinding.inflate(inflater, container, false)
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         initList()
         return binding.root
@@ -56,84 +59,54 @@ class TransactionsFragment : Fragment() {
         _binding = null
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun initList() {
-        binding.swipeRefreshLayout.setOnRefreshListener {
 
-                binding.swipeRefreshLayout.isRefreshing = false
-                reload()
-        }
-        layoutManager = LinearLayoutManager(requireContext())
-        adapter = TransactionAdapter{
-//            loadMore()
-        }
-        itemSectionDecoration = TransactionSectionDecoration(requireContext()) {
-            adapter.list
-        }
-        binding.recyclerView.addItemDecoration(itemSectionDecoration)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = adapter
-    }
+        val arrayList = ArrayList<Header>()
+        val list = ArrayList<ArrayList<Transaction>>()
 
-    private fun reload() {
+        GlobalScope.launch(Dispatchers.IO) {
 
-        var list : LiveData<ArrayList<Transaction>> = dummyData(0)
-//        binding.recyclerView.post {
-//            adapter.reload(list)
-//            Log.d("list", list.toString())
-//        }
-        lateinit var arraylist : ArrayList<Transaction>
-        list.observe(viewLifecycleOwner, Observer {
-            arraylist = it as ArrayList<Transaction>
-            binding.recyclerView.post {
-                adapter.reload(arraylist)
-                adapter.notifyDataSetChanged()
-            }
-        })
+            val distinctMonths = viewModel.distinctMonths().await()
+            var transactionSection = ArrayList<Transaction>()
+            var i = 0
 
-    }
-
-    private fun loadMore() {
-
-//        val list = dummyData(adapter.itemCount)
-//        lateinit var arraylist : ArrayList<Transaction>
-//        list.observe(requireActivity(), Observer {
-//            arraylist=it as ArrayList<Transaction>
-//            binding.recyclerView.post {
-//                adapter.loadMore(arraylist)
-//            }
-//        })
-//        binding.recyclerView.post {
-//            adapter.loadMore(list)
-//        }
-    }
-
-    private fun dummyData(offset: Int, limit : Int = 20): LiveData<ArrayList<Transaction>> {
-        val list = MutableLiveData<ArrayList<Transaction>>()
-        for (i in offset until offset + limit) {
-            when (i) {
-                in 0..15 -> {
-                    Toast.makeText(context,"1 2 15",Toast.LENGTH_SHORT).show()
-                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
+            for (month in distinctMonths) {
+                transactionSection = viewModel.getTransactionsByMonth(month).await()
+                if (!list.contains(transactionSection)) {
+                    list.add(transactionSection)
+                    arrayList.add(Header(month, list[i]))
+                    i++
                 }
-//                in 16..30 -> {
-//                    Toast.makeText(context,"16 2 30",Toast.LENGTH_SHORT).show()
-//                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
-//                }
-//                in 31..45 -> {
-//                    Toast.makeText(context,"31 2 45",Toast.LENGTH_SHORT).show()
-//                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
-//                }
-//                else -> {
-//                    Toast.makeText(context,"46 2 60",Toast.LENGTH_SHORT).show()
-//                    return viewModel.getTransactions() as LiveData<ArrayList<Transaction>>
-//                }
             }
+            requireActivity().runOnUiThread(Runnable {
+                binding.recyclerView.adapter = SectionAdapter(arrayList)
+            })
         }
-        return list
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            initList()
+        }
     }
 
-//    private fun getDummyDataString(day: String): String {
-//        return "2021-10-$day"
-//    }
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private suspend fun <T> LiveData<T>.await(): T = withContext(Dispatchers.Main) {
+        suspendCancellableCoroutine { cont ->
+            val observer = object : Observer<T> {
+                override fun onChanged(value: T) {
+                    cont.resume(value) {}
+                    removeObserver(this)
+                }
+            }
+            observeForever(observer)
+            cont.invokeOnCancellation {
+                removeObserver(observer) // Remove the observer in case of cancellation
+            }
+        }
+    }
 
+    fun updateRecyclerView() {
+        initList()
+    }
 }

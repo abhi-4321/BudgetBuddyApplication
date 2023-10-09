@@ -27,4 +27,11 @@ class TransactionRepository(private val transactionDao: TransactionDao) {
         return transactionDao.totalSpent(month)
     }
 
+    fun getTransactionsByMonth(month : String) : LiveData<ArrayList<Transaction>>{
+        return transactionDao.getTransactionsByMonth(month) as LiveData<ArrayList<Transaction>>
+    }
+
+    fun distinctMonths() : LiveData<List<String>> {
+        return transactionDao.distinctMonths()
+    }
 }

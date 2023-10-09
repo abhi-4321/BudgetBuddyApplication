@@ -28,4 +28,12 @@ interface TransactionDao {
             "WHERE month = :month")
     fun totalSpent(month : String) : LiveData<Int>
 
+    @Query("select * from transacts " +
+            "where month = :month " +
+            "order by date desc,time desc")
+    fun getTransactionsByMonth(month :String) : LiveData<List<Transaction>>
+
+    @Query("select distinct month from transacts")
+    fun distinctMonths() : LiveData<List<String>>
+
 }

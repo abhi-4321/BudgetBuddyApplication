@@ -40,4 +40,12 @@ class AddTransactionViewModel(private val transactionRepository: TransactionRepo
     fun totalSpent(month : String) : LiveData<Int>{
         return transactionRepository.getTotalSpent(month)
     }
+
+    fun getTransactionsByMonth(month : String) : LiveData<ArrayList<Transaction>>{
+        return transactionRepository.getTransactionsByMonth(month)
+    }
+
+    fun distinctMonths() : LiveData<ArrayList<String>> {
+        return transactionRepository.distinctMonths() as LiveData<ArrayList<String>>
+    }
 }
