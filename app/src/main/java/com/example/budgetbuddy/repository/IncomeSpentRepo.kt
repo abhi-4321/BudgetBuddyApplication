@@ -21,6 +21,9 @@ class IncomeSpentRepo(private val incomeSpentDao: IncomeSpentDao) {
     suspend fun updateIncome(income : Int){
         incomeSpentDao.updateIncome(income)
     }
+    suspend fun updateIncomeByTransaction(income : Int){
+        incomeSpentDao.updateIncomeByTransaction(income)
+    }
 
     fun gets() : LiveData<ArrayList<IncomeSpent>> {
         return incomeSpentDao.gets() as LiveData<ArrayList<IncomeSpent>>

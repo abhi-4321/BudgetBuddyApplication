@@ -8,6 +8,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +42,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissListener?) : BottomSheetDialogFragment(), DatePickerDialog.OnDateSetListener,
+class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissListener?) :
+    BottomSheetDialogFragment(), DatePickerDialog.OnDateSetListener,
     CompoundButton.OnCheckedChangeListener {
     private var array: ArrayList<IncomeSpent> = ArrayList()
     lateinit var behavior: BottomSheetBehavior<FrameLayout>
@@ -51,9 +54,9 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
     private var selectedTextView: TextView? = null
     private var it: Int = 0
     private lateinit var budgetViewModel: BudgetViewModel
-    private lateinit var budgetRepository : BudgetRepository
+    private lateinit var budgetRepository: BudgetRepository
     private var arrayList = ArrayList<String>()
-    private lateinit var incomeSpentRepo : IncomeSpentRepo
+    private lateinit var incomeSpentRepo: IncomeSpentRepo
     var int = 0
 
     private fun getWindowHeight() = resources.displayMetrics.heightPixels
@@ -81,11 +84,12 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
         )[AddTransactionViewModel::class.java]
     }
 
+    @SuppressLint("SimpleDateFormat", "ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = AddTransactionBottomSheetBinding.inflate(layoutInflater)
         binding.close.setOnClickListener {
@@ -95,13 +99,13 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
         binding.date.text =
             SimpleDateFormat("dd MMMM yyyy").format(System.currentTimeMillis()).toString()
 
-        viewModel.getCategory().observe(requireActivity(), Observer {
+        viewModel.getCategory().observe(viewLifecycleOwner, Observer {
             binding.category.setText(it)
         })
-        viewModel.getIcon().observe(requireActivity(), Observer {
+        viewModel.getIcon().observe(viewLifecycleOwner, Observer {
             this.it = it
-            val icon: Int? = Drawables.asRes(it)
-            binding.icon.setImageResource(icon!!)
+            val icon: Int = Drawables.asRes(it)
+            binding.icon.setImageResource(icon)
         })
 
         binding.category.isFocusable = false
@@ -113,6 +117,24 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
                 "Bottom Sheet Category"
             )
         }
+
+        binding.category.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                viewModel.icon.observe(viewLifecycleOwner) {
+                    if (it == 34)
+                        binding.choice.visibility = View.VISIBLE
+                    else
+                        binding.choice.visibility = View.GONE
+                }
+            }
+
+        })
 
         val cal = Calendar.getInstance()
         val currentHour = parseInt(cal.get(Calendar.HOUR).toString())
@@ -179,7 +201,7 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
             timePicker.show()
         }
 
-        incomeSpentRepo.gets().observe(this){
+        incomeSpentRepo.gets().observe(this) {
             array = it
         }
 
@@ -208,6 +230,15 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
 
     @OptIn(DelicateCoroutinesApi::class)
     private fun done() {
+        Log.d("Icon", selectedTextView?.text.toString())
+
+        if (it != 34)
+            selectedTextView =
+                if (binding.category.text.toString() == "Salary" || binding.category.text.toString() == "Other Income")
+                    binding.credit
+                else
+                    binding.debit
+
         val category = binding.category.text.toString()
 
         if (selectedTextView == null || selectedModeTextView == null) {
@@ -243,8 +274,17 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
 
             waitForCondition(insertion.toString() == "kotlin.Unit")
 
+            if (selectedTextView?.text.toString() == "Credit" && binding.date.text.substring(3) == currentMonth) {
+                if (array.isEmpty())
+                    incomeSpentRepo.insertIncome(binding.amount.text.toString().toInt())
+                else {
+                    incomeSpentRepo.updateIncomeByTransaction(
+                        binding.amount.text.toString().toInt()
+                    )
+                }
+            }
+
             val totalSpent = addTransactionViewModel.totalSpent(currentMonth).await()
-            Log.d("Insert",totalSpent.toString())
 
             if (array.isEmpty()) {
                 incomeSpentRepo.insertSpent(totalSpent)
@@ -258,7 +298,6 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
 
                 for (item in monthlyTransactions) {
                     if (item.category == category) {
-                        Log.d("BudgetViewModel", "Updating spent for category: $category, total: ${item.total.toInt()}")
                         budgetRepository.updateSpent(item.total.toInt(), category)
                     }
                 }
@@ -268,7 +307,8 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
 
         dismiss()
     }
-    private suspend fun waitForCondition(condition : Boolean) {
+
+    private suspend fun waitForCondition(condition: Boolean) {
         while (!condition) {
             yield()
         }
@@ -280,7 +320,7 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
             val observer = object : Observer<T> {
                 override fun onChanged(value: T) {
                     cont.resume(value) {}
-                removeObserver(this)
+                    removeObserver(this)
                 }
             }
             observeForever(observer)
@@ -380,7 +420,8 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
         super.onDismiss(dialog)
         dismissListener?.onBottomSheetDismiss()
     }
-    interface BottomSheetDismissListener{
+
+    interface BottomSheetDismissListener {
         fun onBottomSheetDismiss()
     }
 }

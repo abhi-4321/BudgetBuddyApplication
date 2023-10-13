@@ -87,7 +87,8 @@ class BudgetFragment : Fragment() {
                 ((saved.toFloat())/(income.toFloat()))*100f
             }
 
-            binding.progress.text = "$per%"
+            val formattedValue = String.format("%.2f", per)
+            binding.progress.text = "${formattedValue}%"
             //circular progress bar
             binding.circularProgressBar.apply {
                 progressMax = 100f

@@ -179,8 +179,6 @@ class CreateBudgetActivity : AppCompatActivity(), View.OnClickListener,
         binding.repaymentBills.setOnClickListener(this)
         binding.payInterestBills.setOnClickListener(this)
         binding.collectInterestBills.setOnClickListener(this)
-        binding.salaryBills.setOnClickListener(this)
-        binding.otherIncomeBills.setOnClickListener(this)
     }
 
     private fun prePopulate() {
@@ -210,7 +208,6 @@ class CreateBudgetActivity : AppCompatActivity(), View.OnClickListener,
 
 
         for (budget in map) {
-
 
             val budgett = if (hashMap.containsKey(budget.key)) {
                 Budget(
@@ -334,12 +331,6 @@ class CreateBudgetActivity : AppCompatActivity(), View.OnClickListener,
             "Collect Interest" -> {
                 binding.collectInterest.text = amount
             }
-            "Salary" -> {
-                binding.salary.text = amount
-            }
-            "Other Income" -> {
-                binding.income.text = amount
-            }
             else -> {
                 list.add(Item(cat, amount))
             }
@@ -445,12 +436,6 @@ class CreateBudgetActivity : AppCompatActivity(), View.OnClickListener,
             }
             "Collect Interest" -> {
                 icon = 31
-            }
-            "Salary" -> {
-                icon = 32
-            }
-            "Other Income" -> {
-                icon = 33
             }
             else -> {
                 icon = 34
@@ -591,14 +576,6 @@ class CreateBudgetActivity : AppCompatActivity(), View.OnClickListener,
             R.id.collectInterestBills -> {
                 icon = 31
                 cat = "Collect Interest"
-            }
-            R.id.salaryBills -> {
-                icon = 32
-                cat = "Salary"
-            }
-            R.id.otherIncomeBills -> {
-                icon = 33
-                cat = "Other Income"
             }
         }
 

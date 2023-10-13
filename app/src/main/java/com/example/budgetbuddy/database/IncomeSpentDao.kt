@@ -19,9 +19,17 @@ interface IncomeSpentDao {
     @Query("UPDATE hisab SET income = :income ")
     suspend fun updateIncome(income : Int)
 
+    @Query("UPDATE hisab SET income = income+:income ")
+    suspend fun updateIncomeByTransaction(income : Int)
+    @Query("UPDATE hisab SET income = income-:income ")
+    suspend fun deleteIncomeByTransaction(income : Int)
+
     @Query("UPDATE hisab SET spent = :spent ")
     suspend fun updateSpent(spent : Int)
 
     @Query("SELECT * FROM hisab")
     fun gets() : LiveData<List<IncomeSpent>>
+
+    @Query("UPDATE hisab SET spent = spent-:spent ")
+    fun deleteSpentByTransaction(spent : Int)
 }
