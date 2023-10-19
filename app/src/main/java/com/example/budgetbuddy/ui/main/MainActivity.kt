@@ -11,8 +11,9 @@ import com.example.budgetbuddy.ui.home.HomeFragment
 import com.example.budgetbuddy.ui.profile.ProfileFragment
 import com.example.budgetbuddy.ui.transactions.TransactionsFragment
 import com.example.budgetbuddy.util.addTransaction.BottomSheetAddTransaction
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding

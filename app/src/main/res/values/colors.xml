@@ -17,4 +17,7 @@
     <color name="line">#F7F7F7</color>
     <color name="green">#118104</color>
 
+    <color name="light_gray">#a2a2a2</color>
+    <color name="highlight_text_color">#2196F3</color>
+
 </resources>
