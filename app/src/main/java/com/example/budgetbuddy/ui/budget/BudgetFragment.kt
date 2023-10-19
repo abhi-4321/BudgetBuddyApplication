@@ -5,30 +5,34 @@ import android.app.Activity
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.Settings.Global
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.MainThread
 import androidx.annotation.NonNull
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.budgetbuddy.R
 import com.example.budgetbuddy.database.Database
+import com.example.budgetbuddy.database.IncomeSpentDao
 import com.example.budgetbuddy.databinding.FragmentBudgetBinding
-import com.example.budgetbuddy.databinding.FragmentHomeBinding
-import com.example.budgetbuddy.databinding.FragmentProfileBinding
 import com.example.budgetbuddy.repository.BudgetRepository
-import com.example.budgetbuddy.ui.home.HomeViewModel
-import org.jetbrains.annotations.Contract
+import com.example.budgetbuddy.repository.IncomeSpentRepo
+import com.example.budgetbuddy.repository.TransactionRepository
+import com.example.budgetbuddy.util.addTransaction.AddTransactionViewModel
+import com.example.budgetbuddy.util.addTransaction.AddTransactionViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.sql.Types.NULL
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BudgetFragment : Fragment() {
 
@@ -39,8 +43,9 @@ class BudgetFragment : Fragment() {
     private lateinit var viewModel: BudgetViewModel
     private var _binding: FragmentBudgetBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var sharedViewModel: SharedViewModel
+    private lateinit var incomeSpentRepo : IncomeSpentRepo
+    private lateinit var addTransactionViewModel: AddTransactionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +53,9 @@ class BudgetFragment : Fragment() {
         val budgetDao = Database.getInstance(requireContext()).budgetDao()
         val budgetRepository = BudgetRepository(budgetDao)
 
-        sharedPreferences = requireContext().getSharedPreferences("Income", MODE_PRIVATE)
+        val incomeSpentDao = Database.getInstance(requireContext()).incomeSpentDao()
+        incomeSpentRepo = IncomeSpentRepo(incomeSpentDao)
+
         sharedViewModel = ViewModelProvider(context as ViewModelStoreOwner)[SharedViewModel::class.java]
         viewModel = ViewModelProvider(
             this,
@@ -64,12 +71,32 @@ class BudgetFragment : Fragment() {
         _binding = FragmentBudgetBinding.inflate(inflater, container, false)
         binding.recycler.layoutManager = LinearLayoutManager(context)
 
-        binding.income.text = (
-                if ((sharedPreferences.getString("Amount","")).isNullOrEmpty())
-                    "₹0.0"
-                else
-                    "₹"+sharedPreferences.getString("Amount","")
-                )
+        incomeSpentRepo.gets().observe(viewLifecycleOwner){
+            val income : Int = if (it.isEmpty()) 0 else if (it[0].income == null) 0 else it[0].income!!
+            binding.income.text = "₹$income"
+
+            val spent : Int = if (it.isEmpty()) 0 else if (it[0].spent == null) 0 else it[0].spent!!
+            binding.spend.text = "₹$spent"
+
+            val saved = (income-spent)
+            binding.saved.text = "₹$saved"
+
+            val per = if(income ==0){
+                0f
+            } else {
+                ((saved.toFloat())/(income.toFloat()))*100f
+            }
+
+            val formattedValue = String.format("%.2f", per)
+            binding.progress.text = "${formattedValue}%"
+            //circular progress bar
+            binding.circularProgressBar.apply {
+                progressMax = 100f
+                setProgressWithAnimation(per,1500)
+                roundBorder = true
+                Log.d("Tool","hiu")
+            }
+        }
 
         viewModel.getBudgets().observe(viewLifecycleOwner, Observer {
             val adapter = BudgetAdapter(it, requireContext())
@@ -77,43 +104,25 @@ class BudgetFragment : Fragment() {
             adapter.notifyDataSetChanged()
         })
 
+        val transactionDao = Database.getInstance(requireContext()).transactionDao()
+        val transactionRepository = TransactionRepository(transactionDao)
+        val currentMonth = SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(System.currentTimeMillis()).toString()
+
+//        transactionRepository.getTotalSpent(currentMonth).observe(viewLifecycleOwner){
+
+//        }
+
+
         binding.btn.setOnClickListener {
-            var intent = Intent(requireContext(), CreateBudgetActivity::class.java)
+            val intent = Intent(requireContext(), CreateBudgetActivity::class.java)
             startActivity(intent)
         }
 
-        @NonNull
-        val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // Handle the result here
-                val data = result.data
-                if (data != null) {
-                    val receivedData = data.getStringExtra("keyName")
-                    binding.income.text = "₹$receivedData"
-                }
-            } else {
-                // Handle the case where the child activity didn't succeed
-                binding.income.text = (
-                        if ((sharedPreferences.getString("Amount","")).isNullOrEmpty())
-                            "₹0.0"
-                        else
-                            "₹"+sharedPreferences.getString("Amount","")
-                        )
-            }
-        }
-
         binding.floatingActionBtn.setOnClickListener {
-            var intent = Intent(requireContext(), CreateBudgetActivity::class.java)
-            activityResultLauncher.launch(intent)
+            val intent = Intent(requireContext(), CreateBudgetActivity::class.java)
+            startActivity(intent)
         }
 
-        //circular progress bar
-        binding.circularProgressBar.apply {
-            progressMax = 100f
-            setProgressWithAnimation(50f, 1000)
-            roundBorder = true
-
-        }
 
 
         return binding.root

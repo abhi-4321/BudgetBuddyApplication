@@ -13,22 +13,6 @@ android {
     viewBinding {
         enabled = true
     }
-    dataBinding {
-        enabled = true
-    }
-
-    splits {
-        density {
-            enable true
-            reset()
-            include 'xxhdpi'
-        }
-        language {
-            enable true
-            // You don't use resourceConfigurations here for specifying languages.
-            include 'en'
-        }
-    }
 
     defaultConfig {
         applicationId "com.example.budgetbuddy"
@@ -42,7 +26,6 @@ android {
 
     buildTypes {
         release {
-            crunchPngs false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

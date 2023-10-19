@@ -1,6 +1,5 @@
 package com.example.budgetbuddy.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,12 +10,12 @@ import com.example.budgetbuddy.ui.home.HomeFragment
 import com.example.budgetbuddy.ui.profile.ProfileFragment
 import com.example.budgetbuddy.ui.transactions.TransactionsFragment
 import com.example.budgetbuddy.util.addTransaction.BottomSheetAddTransaction
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(),BottomSheetAddTransaction.BottomSheetDismissListener {
 
     private lateinit var binding : ActivityMainBinding
+    private var currentFragment : Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment.newInstance())
 
         binding.btn.setOnClickListener{
-            val bottomSheetDialog = BottomSheetAddTransaction()
+            val bottomSheetDialog = BottomSheetAddTransaction(this)
             bottomSheetDialog.isCancelable = false
             bottomSheetDialog.show(supportFragmentManager,"Bottom Sheet")
         }
@@ -56,6 +55,14 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
 
         fragmentTransaction.replace(R.id.frame,fragment)
-        fragmentTransaction.commit()
+        fragmentTransaction.commitNow()
+
+        currentFragment = fragment
+    }
+
+    override fun onBottomSheetDismiss() {
+        if (currentFragment is TransactionsFragment){
+            (currentFragment as TransactionsFragment).updateRecyclerView()
+        }
     }
 }

@@ -19,10 +19,15 @@ class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewMode
             budgetRepository.update(budget)
         }
     }
-
     fun insert(budget: Budget) {
         viewModelScope.launch(Dispatchers.IO) {
             budgetRepository.insert(budget)
+        }
+    }
+
+    fun updateSpent(spent : Int , category : String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            budgetRepository.updateSpent(spent,category)
         }
     }
 }

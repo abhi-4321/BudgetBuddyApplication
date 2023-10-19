@@ -57,7 +57,7 @@ class CategoryAdapter2(
 
             for (item in it){
                 if (item.category == arrayList[position].category){
-                    holder.setBudget.text = item.amount
+                    holder.setBudget.text = "₹${item.amount}"
                 }
             }
         }

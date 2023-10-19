@@ -262,7 +262,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15ssp"
                 android:paddingVertical="@dimen/_1sdp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/choice"
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
