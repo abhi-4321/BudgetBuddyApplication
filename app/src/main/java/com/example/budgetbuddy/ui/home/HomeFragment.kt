@@ -1,20 +1,25 @@
 package com.example.budgetbuddy.ui.home
 
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.Typeface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import com.example.budgetbuddy.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.budgetbuddy.database.Database
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
-import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.components.XAxis
+import com.example.budgetbuddy.repository.HomeRepository
+import com.example.budgetbuddy.repository.IncomeSpentRepo
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+
 
 class HomeFragment : Fragment() {
 
@@ -24,12 +29,26 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
-
+    private lateinit var incomeSpentRepo : IncomeSpentRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+        val transactionDao = Database.getInstance(requireContext()).transactionDao()
+        val homeRepository = HomeRepository(transactionDao)
+        viewModel = ViewModelProvider(requireActivity(),HomeViewModelFactory(homeRepository))[HomeViewModel::class.java]
+
+        val incomeSpentDao = Database.getInstance(requireContext()).incomeSpentDao()
+        incomeSpentRepo = IncomeSpentRepo(incomeSpentDao)
     }
+
+    inner class HomeViewModelFactory(private val homeRepository: HomeRepository) : ViewModelProvider.Factory{
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return HomeViewModel(homeRepository) as T
+        }
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,126 +56,67 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        val information = ArrayList<BarEntry>()
-
-        information.add(BarEntry(1f, 10f))
-        information.add(BarEntry(4f, 20f))
-        information.add(BarEntry(5f, 30f))
-        information.add(BarEntry(2f, 50f))
-        information.add(BarEntry(3f, 10f))
-        information.add(BarEntry(6f, 10f))
-
-        val dataSet = BarDataSet(information, "Report")
-//        dataSet.colors = ColorTemplate.MATERIAL_COLORS.asList()
-        dataSet.setColors(ColorTemplate.rgb("#317773"))
-        dataSet.valueTextColor = Color.BLACK
-        dataSet.valueTextSize = 10f
+        val adapter = ViewPagerAdapter(
+            childFragmentManager, lifecycle
+        )
+        binding.viewpager.adapter = adapter
 
 
-        val barData = BarData(dataSet)
-         binding.barChart.setDrawValueAboveBar(true)
-        binding.barChart.data = barData
-
-
-//        binding.barChart.xAxis.setDrawGridLines(false)
-//        binding.barChart.axisRight.setDrawGridLines(false)
-//       binding.barChart.axisLeft.setDrawGridLines(false)
-
-//        binding.barChart.xAxis.setDrawLabels(false)
-//        binding.barChart.axisLeft.setDrawLabels(false)
-//        binding.barChart.axisRight.setDrawLabels(false)
-        binding.barChart.setDrawBorders(false)
-
-//        binding.barChart.description.text = "Bar Report Demo"
-//        binding.barChart.animateY(2000, Easing.Linear)
-        binding.barChart.description.isEnabled = false
-
-
-        binding.barChart.axisRight.apply {
-            setDrawGridLines(false)
-            setDrawLabels(false)
-            setDrawAxisLine(false)
-        }
-        binding.barChart.axisLeft.apply {
-            setDrawGridLines(false)
-            setDrawLabels(false)
-            setDrawAxisLine(false)
-        }
-        binding.barChart.xAxis.apply {
-            setDrawGridLines(false)
-            setDrawLabels(false)
-            setDrawAxisLine(false)
-        }
-        binding.barChart.setTouchEnabled(false)
-
-// Disable zooming on both the X and Y axes
-        binding.barChart.setScaleEnabled(false)
-        binding.barChart.setScaleXEnabled(false)
-        binding.barChart.setScaleYEnabled(false)
-        binding.barChart.setDrawGridBackground(false)
-        binding.barChart.setDrawBorders(false)
-        binding.barChart.legend.isEnabled = false
-        binding.barChart.setDrawMarkers(false)
-
-        val xAxis = binding.barChart.xAxis
-        xAxis.isEnabled = true // Show the X-axis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM // Set the X-axis position to the bottom (default)
-        xAxis.setDrawGridLines(false) // Hide X-axis grid lines (if needed)
-        xAxis.setDrawAxisLine(true) // Hide X-axis axis line (if needed)
-        xAxis.setDrawLabels(true) // Show X-axis labels
-        xAxis.labelRotationAngle = 0f // Set the label rotation angle (if needed)
-      // Set X-axis label text color
-        xAxis.textSize = 10f
-
-
-        //implementing tab layout
-        val monthsTab = binding.tabLayout.newTab()
-        val weeksTab = binding.tabLayout.newTab()
-        monthsTab.text = "Months"
-        weeksTab.text = "Weeks"
-        binding.tabLayout.addTab(monthsTab)
-        binding.tabLayout.addTab(weeksTab)
-
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                // Handle tab selection
+        TabLayoutMediator(
+            binding.tabLayout, binding.viewpager
+        ) { tab: TabLayout.Tab, position: Int ->
+            if (position == 0) {
+                tab.text = "Monthly"
+            }else {
+                tab.text = "Weekly"
             }
+        }.attach()
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                // Handle tab unselection
+        incomeSpentRepo.gets().observe(viewLifecycleOwner) {
+            if (it.isEmpty())
+                binding.balance.text = "₹0"
+            else if (it[0].spent == null)
+                binding.balance.text = "₹" + it[0].income.toString()
+            else if (it[0].income == null)
+                binding.balance.text = "₹0"
+            else
+                binding.balance.text = "₹" + (it[0].income?.minus(it[0].spent!!)).toString()
+        }
+
+        viewModel.getPieEntries().observe(viewLifecycleOwner){
+            val records = it.map { originalEntry ->
+                PieEntry(originalEntry.amount.toFloat(), originalEntry.category)
             }
+            val piedataset = PieDataSet(records, "Report")
+            piedataset.colors = ColorTemplate.COLORFUL_COLORS.toList()
+            piedataset.valueTextColor = Color.WHITE
+            piedataset.valueTypeface = Typeface.DEFAULT
+            piedataset.valueTextSize = 14f
 
-            override fun onTabReselected(tab: TabLayout.Tab) {
-                // Handle tab reselection
-            }
-        })
-//implementing pichart which shows data related to category
+            val legend = binding.piChart.legend
+            legend.textSize = 13f
+            legend.orientation = Legend.LegendOrientation.VERTICAL
+            legend.isWordWrapEnabled = true
 
-        val records = ArrayList<PieEntry>()
-        records.add(PieEntry(32f, "food & beverages"))
-        records.add(PieEntry(62f, "petrol"))
-        records.add(PieEntry(20f, "rent"))
-        records.add(PieEntry(72f, "bills"))
-        records.add(PieEntry(82f, "other expenses"))
-        records.add(PieEntry(22f, "vehicle Maintenance"))
-        records.add(PieEntry(34f, "medical check up"))
-        records.add(PieEntry(12f, "pets"))
+            legend.form = Legend.LegendForm.SQUARE // Set the desired form for the legend
+            legend.formSize = 8f // Adjust the form size as needed
 
-        val piedataset = PieDataSet(records, "Report")
+            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+            legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+            // Adjust the horizontal offset
+            legend.yOffset = -20f
 
-        val colors = ColorTemplate.COLORFUL_COLORS.toList()
-        piedataset.setColors(colors)
-        piedataset.setValueTextColor(Color.BLACK)
-        piedataset.setValueTextSize(10f)
-        binding.piChart.description.isEnabled = false
-        val piedata = PieData(piedataset)
-        binding.piChart.data = piedata
+            binding.piChart.description.isEnabled = false
+            val piedata = PieData(piedataset)
+            piedata.setValueTextSize(15f)
+            binding.piChart.data = piedata
+            binding.piChart.transparentCircleRadius = 2f
+            binding.piChart.setEntryLabelTextSize(10f)
+            binding.piChart.invalidate()
+            binding.piChart.centerText = "Spending based on category"
+            binding.piChart.setDrawSliceText(false)
+        }
 
-       binding.piChart.invalidate()
-        binding.piChart.centerText = "Spending based on category"
-        binding.piChart.setDrawSliceText(false)
         return binding.root
     }
-
-
 }

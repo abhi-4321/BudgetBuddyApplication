@@ -3,6 +3,8 @@ package com.example.budgetbuddy.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.budgetbuddy.ui.budget.MTransactions
+import com.example.budgetbuddy.ui.home.BarEntries
+import com.example.budgetbuddy.ui.home.PieEntries
 import com.example.budgetbuddy.ui.transactions.Flow
 import com.example.budgetbuddy.util.addTransaction.Transaction
 
@@ -52,4 +54,21 @@ interface TransactionDao {
 
     @Query("select * from transacts where id=:id")
     fun getTransact(id : Int) : LiveData<Transaction>
+
+    @Query("select amount,category from transacts " +
+            "where debit != 'Credit' " +
+            "group by category")
+    fun getPieEntries(): LiveData<List<PieEntries>>
+
+    @Query("SELECT month,total FROM " +
+            "(SELECT month,SUM(amount) AS 'total' " +
+            "FROM transacts WHERE debit != 'Credit' " +
+            "GROUP BY month )")
+    fun getMonthlyData() : LiveData<List<BarEntries>>
+
+    @Query("SELECT month,total FROM " +
+            "(SELECT month,SUM(amount) AS 'total' " +
+            "FROM transacts WHERE debit != 'Credit' " +
+            "GROUP BY month )")
+    fun getWeeklyData() : LiveData<List<BarEntries>>
 }

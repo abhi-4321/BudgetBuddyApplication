@@ -27,6 +27,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="₹2,000"
@@ -259,23 +260,13 @@
                     app:tabMode="fixed"
                     app:tabTextColor="@color/tab_unselected_color" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="₹1,000"
-                    android:textSize="@dimen/_18sdp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total spend this month"
-                    android:textSize="@dimen/_8sdp" />
-
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/barChart"
+                <androidx.viewpager2.widget.ViewPager2
                     android:layout_width="match_parent"
-                    android:layout_height="300dp" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/viewpager"
+                    android:paddingBottom="@dimen/_10sdp"
+                    />
+
             </LinearLayout>
 
             <LinearLayout
@@ -295,7 +286,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="@dimen/_100sdp"
                 android:orientation="vertical"
@@ -304,7 +295,8 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/piChart"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_300sdp" />
+                    android:layout_height="@dimen/_300sdp"
+                    />
             </LinearLayout>
 
 

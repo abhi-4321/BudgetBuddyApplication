@@ -1,12 +1,15 @@
 package com.example.budgetbuddy.ui.home
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.budgetbuddy.databinding.FragmentHomeBinding
+import com.example.budgetbuddy.repository.HomeRepository
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
+    fun getPieEntries() : LiveData<List<PieEntries>> {
+        return homeRepository.getPieEntries()
+    }
 
+    fun getBarEntries() : LiveData<ArrayList<BarEntries>> {
+        return homeRepository.getMonthlyData() as LiveData<ArrayList<BarEntries>>
+    }
 }

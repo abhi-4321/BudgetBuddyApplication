@@ -303,9 +303,8 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
                 }
             }
         }
-
-
         dismiss()
+        dismissListener?.onBottomSheetDismiss()
     }
 
     private suspend fun waitForCondition(condition: Boolean) {
@@ -418,7 +417,7 @@ class BottomSheetAddTransaction(private val dismissListener: BottomSheetDismissL
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        dismissListener?.onBottomSheetDismiss()
+
     }
 
     interface BottomSheetDismissListener {

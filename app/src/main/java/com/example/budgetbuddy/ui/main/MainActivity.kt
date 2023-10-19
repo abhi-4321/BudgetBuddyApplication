@@ -1,6 +1,7 @@
 package com.example.budgetbuddy.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.budgetbuddy.R
@@ -12,10 +13,10 @@ import com.example.budgetbuddy.ui.transactions.TransactionsFragment
 import com.example.budgetbuddy.util.addTransaction.BottomSheetAddTransaction
 
 
-class MainActivity : AppCompatActivity(),BottomSheetAddTransaction.BottomSheetDismissListener {
+class MainActivity : AppCompatActivity(), BottomSheetAddTransaction.BottomSheetDismissListener {
 
-    private lateinit var binding : ActivityMainBinding
-    private var currentFragment : Fragment? = null
+    private lateinit var binding: ActivityMainBinding
+    private var currentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +25,14 @@ class MainActivity : AppCompatActivity(),BottomSheetAddTransaction.BottomSheetDi
         setContentView(binding.root)
         replaceFragment(HomeFragment.newInstance())
 
-        binding.btn.setOnClickListener{
+        binding.btn.setOnClickListener {
             val bottomSheetDialog = BottomSheetAddTransaction(this)
             bottomSheetDialog.isCancelable = false
-            bottomSheetDialog.show(supportFragmentManager,"Bottom Sheet")
+            bottomSheetDialog.show(supportFragmentManager, "Bottom Sheet")
         }
 
         binding.botNavView.setOnItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.home -> {
                     replaceFragment(HomeFragment.newInstance())
                 }
@@ -54,15 +55,15 @@ class MainActivity : AppCompatActivity(),BottomSheetAddTransaction.BottomSheetDi
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-        fragmentTransaction.replace(R.id.frame,fragment)
-        fragmentTransaction.commitNow()
+        fragmentTransaction.replace(R.id.frame, fragment)
+        fragmentTransaction.commit()
 
         currentFragment = fragment
     }
 
     override fun onBottomSheetDismiss() {
-        if (currentFragment is TransactionsFragment){
-            (currentFragment as TransactionsFragment).updateRecyclerView()
-        }
+        if (currentFragment is TransactionsFragment)
+            if ((currentFragment as TransactionsFragment).isAdded && (currentFragment as TransactionsFragment).view != null)
+                (currentFragment as TransactionsFragment).updateRecyclerView()
     }
 }
