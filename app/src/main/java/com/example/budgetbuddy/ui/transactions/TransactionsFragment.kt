@@ -38,9 +38,8 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnClick,
 
     private lateinit var viewModel: AddTransactionViewModel
     private lateinit var incomeSpentRepo: IncomeSpentRepo
-    private var _binding: FragmentTransactionsBinding? = null
-    private val binding
-        get() = _binding ?: throw IllegalStateException("Fragment view is not available yet")
+    private lateinit var binding: FragmentTransactionsBinding
+
     private lateinit var observer: Observer<List<Flow>>
 
     @SuppressLint("SetTextI18n")
@@ -100,6 +99,8 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnClick,
         val transactionDao = Database.getInstance(requireContext()).transactionDao()
         val transactionRepository = TransactionRepository(transactionDao)
 
+        binding = FragmentTransactionsBinding.inflate(layoutInflater)
+
         val incomeSpentDao = Database.getInstance(requireContext()).incomeSpentDao()
         incomeSpentRepo = IncomeSpentRepo(incomeSpentDao)
 
@@ -114,7 +115,6 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnClick,
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTransactionsBinding.inflate(inflater, container, false)
 
         incomeSpentRepo.gets().observe(viewLifecycleOwner) {
             if (it.isEmpty())
@@ -160,7 +160,6 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnClick,
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.getInOutFlow().removeObserver(observer)
-        _binding = null
     }
 
     @OptIn(DelicateCoroutinesApi::class)

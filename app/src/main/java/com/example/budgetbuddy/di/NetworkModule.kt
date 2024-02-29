@@ -2,8 +2,6 @@ package com.example.budgetbuddy.di
 
 import android.util.Log
 import com.example.budgetbuddy.api.AuthInterceptor
-
-import com.example.budgetbuddy.api.BudgetApi
 import com.example.budgetbuddy.api.UserApi
 import com.example.budgetbuddy.util.Constants.BASE_URL
 import dagger.Module
@@ -57,13 +55,13 @@ class NetworkModule {
 //        return retrofitBuilder.client(okHttpClient).build().create(BudgetApi::class.java)
 //    }
 
-
-    @Singleton
-    @Provides
-    fun provideBudgetApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): BudgetApi {
-        Log.d("budgetResponse", "in noteApi")
-        return retrofitBuilder.client(okHttpClient).build().create(BudgetApi::class.java)
-    }
+//
+//    @Singleton
+//    @Provides
+//    fun provideBudgetApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): BudgetApi {
+//        Log.d("budgetResponse", "in noteApi")
+//        return retrofitBuilder.client(okHttpClient).build().create(BudgetApi::class.java)
+//    }
 
 
 }
