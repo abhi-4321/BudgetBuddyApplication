@@ -15,4 +15,7 @@
     <string name="txt_login_subheader">Login to access your notes</string>
     <string name="txt_login">Login</string>
     <string name="txt_error_message">%1$S*</string>
+    <string name="abc_gmail_com">abc@gmail.com</string>
+    <string name="abc">abc</string>
+
 </resources>

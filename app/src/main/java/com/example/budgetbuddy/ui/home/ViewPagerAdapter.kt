@@ -9,13 +9,10 @@ class ViewPagerAdapter(fragmentManager : FragmentManager, lifeCycle : Lifecycle)
     FragmentStateAdapter(fragmentManager,lifeCycle){
 
     override fun createFragment(position: Int): Fragment {
-        return if (position == 0)
-            MonthlyFragment.newInstance()
-        else
-            WeeklyFragment.newInstance()
+        return MonthlyFragment.newInstance()
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 1
     }
 }

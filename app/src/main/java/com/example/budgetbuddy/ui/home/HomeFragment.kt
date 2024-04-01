@@ -64,12 +64,8 @@ class HomeFragment : Fragment() {
 
         TabLayoutMediator(
             binding.tabLayout, binding.viewpager
-        ) { tab: TabLayout.Tab, position: Int ->
-            if (position == 0) {
-                tab.text = "Monthly"
-            }else {
-                tab.text = "Weekly"
-            }
+        ) { tab: TabLayout.Tab, _: Int ->
+            tab.text = "Monthly"
         }.attach()
 
         incomeSpentRepo.gets().observe(viewLifecycleOwner) {
